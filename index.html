@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>HYPE LIVE 18+ - Live Streaming</title>
+<meta name="description" content="Plataforma de live streaming para maiores de 18 anos. Presentes, ganhos e interação em tempo real.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#8a2be2;--purple2:#a855f7;--purple3:#c084fc;--pink:#ec4899;--bg:#0a0a0f;--bg2:#111118;--bg3:#1a1a24;--card:#14141e;--border:#2a2a38;--text:#e0e0e0;--text2:#888;--white:#fff;--green:#00e676;--red:#ff2d2d;--gold:#ffd600;--cyan:#00e5ff}
+html,body,#root{width:100%;min-height:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--purple);border-radius:3px}
+a{color:var(--purple2);text-decoration:none}
+button{font-family:'Inter',sans-serif;cursor:pointer;border:none;outline:none}
+input,textarea,select{font-family:'Inter',sans-serif;outline:none}
+.page{min-height:100vh;padding-bottom:80px}
+.hidden{display:none!important}
+/* NAV */
+.nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,15,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:22px;font-weight:900;color:var(--purple2);letter-spacing:1px}
+.nav-logo span{color:var(--pink)}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{color:var(--text2);font-size:13px;font-weight:600;transition:.3s;padding:8px 14px;border-radius:8px}
+.nav-links a:hover,.nav-links a.active{color:var(--purple2);background:rgba(138,43,226,.1)}
+.nav-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;cursor:pointer}
+/* AGE GATE */
+.agegate{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center}
+.agegate-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:48px;text-align:center;max-width:440px;width:90%}
+.agegate-box h1{font-size:32px;font-weight:900;margin-bottom:8px}
+.agegate-box h1 .p{color:var(--purple2)}.agegate-box h1 .pk{color:var(--pink)}
+.agegate-box .warn{font-size:14px;color:var(--text2);margin-bottom:8px;line-height:1.6}
+.agegate-box .age-icon{font-size:48px;margin-bottom:16px}
+.agegate-box .age-select{display:flex;gap:12px;margin:20px 0}
+.agegate-box .age-btn{flex:1;padding:16px;border-radius:14px;font-size:16px;font-weight:700;transition:.3s}
+.age-yes{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff}
+.age-yes:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(138,43,226,.4)}
+.age-no{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.agegate-box .rules{font-size:11px;color:#555;margin-top:16px;line-height:1.5}
+/* BUTTONS */
+.btn{padding:12px 24px;border-radius:12px;font-weight:700;font-size:14px;transition:.3s;display:inline-flex;align-items:center;gap:8px}
+.btn-purple{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;box-shadow:0 4px 20px rgba(138,43,226,.3)}
+.btn-purple:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(138,43,226,.5)}
+.btn-outline{background:transparent;color:var(--purple2);border:2px solid var(--purple)}
+.btn-outline:hover{background:var(--purple);color:#fff}
+.btn-sm{padding:8px 16px;font-size:12px;border-radius:8px}
+.btn-green{background:var(--green);color:#000}
+.btn-red{background:var(--red);color:#fff}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#ff9800);color:#000}
+/* LANDING */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 30%,rgba(138,43,226,.08),transparent 60%)}
+.hero-content{text-align:center;max-width:700px;position:relative;z-index:1}
+.hero h1{font-size:clamp(36px,7vw,64px);font-weight:900;line-height:1.1;margin-bottom:16px}
+.hero h1 .p{color:var(--purple2)}.hero h1 .pk{color:var(--pink)}.hero h1 .g{color:var(--gold)}
+.hero p{font-size:18px;color:var(--text2);margin-bottom:32px;line-height:1.6}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero-18{display:inline-flex;align-items:center;gap:8px;background:rgba(255,45,45,.1);border:1px solid rgba(255,45,45,.3);padding:8px 16px;border-radius:20px;font-size:13px;color:var(--red);margin-bottom:24px}
+.features{max-width:1100px;margin:0 auto;padding:80px 20px}
+.features h2{text-align:center;font-size:32px;font-weight:900;margin-bottom:48px}
+.features h2 .p{color:var(--purple2)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.3s}
+.feat-card:hover{border-color:var(--purple);transform:translateY(-3px)}
+.feat-icon{font-size:36px;margin-bottom:12px}
+.feat-card h3{font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px}
+.feat-card p{font-size:13px;color:var(--text2);line-height:1.5}
+/* AUTH */
+.auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 20px}
+.auth-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px;max-width:440px;width:100%}
+.auth-box h2{font-size:24px;font-weight:900;margin-bottom:24px;text-align:center}
+.auth-box h2 .p{color:var(--purple2)}
+.auth-tabs{display:flex;gap:0;border-radius:10px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px}
+.auth-tab{flex:1;padding:12px;text-align:center;font-weight:700;font-size:14px;cursor:pointer;transition:.3s;background:var(--bg3);color:var(--text2)}
+.auth-tab.active{background:var(--purple);color:#fff}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;color:var(--text2);margin-bottom:6px;font-weight:600}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 16px;background:var(--bg3);border:2px solid var(--border);border-radius:10px;color:var(--white);font-size:14px;transition:.3s}
+.form-group input:focus{border-color:var(--purple)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-error{color:var(--red);font-size:12px;margin-top:4px}
+/* LIVE */
+.live-page{padding-top:60px}
+.live-layout{display:flex;height:calc(100vh - 60px)}
+.live-video{flex:1;background:#000;position:relative;display:flex;align-items:center;justify-content:center}
+.live-video canvas{width:100%;height:100%;object-fit:cover}
+.live-overlay{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.live-info{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:10px}
+.live-badge{background:var(--red);color:#fff;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;animation:pulse 2s infinite}
+.live-viewers{background:rgba(0,0,0,.6);padding:4px 12px;border-radius:20px;font-size:12px;color:#fff;display:flex;align-items:center;gap:4px}
+.live-creator{background:rgba(0,0,0,.6);padding:8px 16px;border-radius:12px;display:flex;align-items:center;gap:8px;position:absolute;bottom:16px;left:16px;pointer-events:auto}
+.live-creator .avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink))}
+.live-creator .name{color:#fff;font-weight:700;font-size:14px}
+.live-creator .follow{margin-left:8px;padding:4px 12px;border-radius:8px;background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;border:none}
+.live-report{position:absolute;top:16px;right:16px;pointer-events:auto}
+.live-report button{padding:6px 14px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;font-size:12px;cursor:pointer;border:1px solid rgba(255,255,255,.2)}
+/* CHAT */
+.live-chat{width:360px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column}
+.chat-header{padding:12px 16px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px;color:var(--white);display:flex;justify-content:space-between;align-items:center}
+.chat-messages{flex:1;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.chat-msg{display:flex;gap:8px;animation:fadeIn .3s}
+.chat-msg .avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.chat-msg .body{flex:1}
+.chat-msg .author{font-size:12px;font-weight:700;margin-bottom:2px}
+.chat-msg .text{font-size:13px;color:var(--text2);line-height:1.4}
+.chat-msg.system .text{color:var(--gold);font-style:italic}
+.chat-msg.gift{background:rgba(138,43,226,.1);border:1px solid rgba(138,43,226,.2);border-radius:10px;padding:8px 12px}
+.chat-msg.gift .text{color:var(--pink);font-weight:600}
+.chat-input{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px}
+.chat-input input{flex:1;padding:10px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;color:var(--white);font-size:13px}
+.chat-input button{padding:10px 16px;border-radius:10px;background:var(--purple);color:#fff;font-weight:700;font-size:13px;border:none}
+/* GIFTS PANEL */
+.gifts-panel{border-top:1px solid var(--border);padding:12px 16px;background:var(--bg3)}
+.gifts-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
+.gift-item{flex-shrink:0;text-align:center;cursor:pointer;padding:10px;border-radius:12px;border:2px solid transparent;transition:.3s;min-width:72px}
+.gift-item:hover,.gift-item.selected{border-color:var(--purple);background:rgba(138,43,226,.1)}
+.gift-item .gift-emoji{font-size:28px}
+.gift-item .gift-name{font-size:10px;color:var(--text2);margin-top:4px}
+.gift-item .gift-price{font-size:12px;font-weight:700;color:var(--gold)}
+.gift-send{width:100%;margin-top:10px;padding:12px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-weight:700;font-size:14px;border:none;display:flex;align-items:center;justify-content:center;gap:8px}
+/* DASHBOARD */
+.dash{padding-top:76px;max-width:1100px;margin:0 auto;padding-left:20px;padding-right:20px}
+.dash h1{font-size:28px;font-weight:900;margin-bottom:24px}
+.dash h1 .p{color:var(--purple2)}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:32px}
+.dash-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center}
+.dash-card .dc-icon{font-size:32px;margin-bottom:8px}
+.dash-card .dc-num{font-size:28px;font-weight:900;color:var(--white)}
+.dash-card .dc-label{font-size:13px;color:var(--text2);margin-top:4px}
+.dash-card.purple{border-color:var(--purple)}
+.dash-card.gold{border-color:var(--gold)}
+.dash-card.green{border-color:var(--green)}
+.dash-card.pink{border-color:var(--pink)}
+.dash-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px}
+.dash-section h3{font-size:18px;font-weight:700;color:var(--white);margin-bottom:16px}
+.dash-table{width:100%;border-collapse:collapse}
+.dash-table th{text-align:left;padding:10px 12px;font-size:12px;color:var(--text2);border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:1px}
+.dash-table td{padding:10px 12px;font-size:13px;border-bottom:1px solid rgba(42,42,56,.5)}
+.dash-table tr:hover td{background:rgba(138,43,226,.03)}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.badge-green{background:rgba(0,230,118,.15);color:var(--green)}
+.badge-red{background:rgba(255,45,45,.15);color:var(--red)}
+.badge-purple{background:rgba(138,43,226,.15);color:var(--purple2)}
+.badge-gold{background:rgba(255,214,0,.15);color:var(--gold)}
+/* WALLET */
+.wallet-balance{text-align:center;padding:40px;background:linear-gradient(135deg,rgba(138,43,226,.1),rgba(236,72,153,.05));border-radius:20px;border:1px solid var(--border);margin-bottom:24px}
+.wallet-balance .wb-label{font-size:14px;color:var(--text2)}
+.wallet-balance .wb-amount{font-size:48px;font-weight:900;color:var(--gold);margin:8px 0}
+.wallet-actions{display:flex;gap:12px;justify-content:center}
+.coin-pack{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;cursor:pointer;transition:.3s}
+.coin-pack:hover{border-color:var(--purple);transform:translateY(-3px)}
+.coin-pack .cp-amount{font-size:24px;font-weight:900;color:var(--gold)}
+.coin-pack .cp-price{font-size:16px;color:var(--white);margin:8px 0}
+.coin-pack .cp-bonus{font-size:11px;color:var(--green)}
+/* ADMIN */
+.admin-stat{display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg3);border-radius:10px;margin-bottom:8px}
+.admin-stat .as-icon{font-size:24px}
+.admin-stat .as-info{flex:1}
+.admin-stat .as-num{font-size:18px;font-weight:700;color:var(--white)}
+.admin-stat .as-label{font-size:12px;color:var(--text2)}
+/* RANKING */
+.rank-item{display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;transition:.3s}
+.rank-item:hover{border-color:var(--purple)}
+.rank-pos{font-family:'Inter';font-size:20px;font-weight:900;width:36px;text-align:center}
+.rank-pos.r1{color:var(--gold)}.rank-pos.r2{color:#c0c0c0}.rank-pos.r3{color:#cd7f32}
+.rank-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+.rank-info{flex:1}.rank-name{font-weight:700;color:var(--white)}.rank-earn{font-size:13px;color:var(--text2)}
+.rank-amount{font-family:'Inter';font-size:18px;font-weight:700;color:var(--gold)}
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes giftFloat{0%{opacity:1;transform:translateY(0) scale(1)}50%{opacity:1;transform:translateY(-60px) scale(1.2)}100%{opacity:0;transform:translateY(-120px) scale(0.8)}}
+.gift-anim{position:fixed;font-size:48px;animation:giftFloat 1.5s forwards;pointer-events:none;z-index:200}
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 20px;text-align:center}
+footer p{color:var(--text2);font-size:12px;line-height:1.6}
+footer .f-links{display:flex;gap:20px;justify-content:center;margin-top:12px}
+footer .f-links a{color:var(--text2);font-size:12px}
+/* RESPONSIVE */
+@media(max-width:768px){
+.live-layout{flex-direction:column}
+.live-chat{width:100%;height:40vh}
+.live-video{height:60vh}
+.nav-links a.hide-mobile{display:none}
+.dash-grid{grid-template-columns:1fr 1fr}
+.hero h1{font-size:32px}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+const{useState,useEffect,useRef,useCallback,createContext,useContext}=React;
+
+/* ============================================================
+   HYPE LIVE 18+ - PLATAFORMA COMPLETA
+   ============================================================ */
+
+// ---- DADOS SIMULADOS (Supabase fake) ----
+const DB={
+  users:[
+    {id:1,username:'ana_live',name:'Ana Carolina',email:'ana@test.com',password:'1234',age:22,bio:'Live a cada dia! 💜',avatar:'#8a2be2',coins:5000,totalEarned:12500,followers:1520,isCreator:true,banned:false,balance:8750},
+    {id:2,username:'pedro_gamer',name:'Pedro HS',email:'pedro@test.com',password:'1234',age:25,bio:'Gamer e streamer',avatar:'#ec4899',coins:200,totalEarned:3200,followers:890,isCreator:true,banned:false,balance:2240},
+    {id:3,username:'maria_arts',name:'Maria Artista',email:'maria@test.com',password:'1234',age:28,bio:'Arte e criatividade',avatar:'#00e676',coins:1200,totalEarned:6800,followers:2100,isCreator:true,banned:false,balance:4760},
+    {id:4,username:'julia_fits',name:'Julia Fitness',email:'julia@test.com',password:'1234',age:24,bio:'Treino e lifestyle',avatar:'#ffd600',coins:800,totalEarned:4500,followers:1800,isCreator:true,banned:false,balance:3150},
+    {id:5,username:'client1',name:'Cliente Teste',email:'cli@test.com',password:'1234',age:21,bio:'',avatar:'#00e5ff',coins:1000,totalEarned:0,followers:0,isCreator:false,banned:false,balance:0}
+  ],
+  lives:[
+    {id:1,creatorId:1,category:'Conversa',title:'Bate-papo noturno 💜',viewers:342,startedAt:Date.now()-3600000,status:'live',chat:[]},
+    {id:2,creatorId:2,category:'Games',title:'RANKED NO VALORANT 🔥',viewers:128,startedAt:Date.now()-1800000,status:'live',chat:[]},
+    {id:3,creatorId:3,category:'Arte',title:'Desenhando ao vivo 🎨',viewers:89,startedAt:Date.now()-600000,status:'live',chat:[]}
+  ],
+  gifts:[
+    {id:'rosa',emoji:'🌹',name:'Rosa',price:2,coins:10},
+    {id:'coracao',emoji:'❤️',name:'Coração',price:5,coins:25},
+    {id:'foguete',emoji:'🚀',name:'Foguete',price:20,coins:100},
+    {id:'diamante',emoji:'💎',name:'Diamante',price:50,coins:250},
+    {id:'coroa',emoji:'👑',name:'Coroa',price:100,coins:500}
+  ],
+  transactions:[],
+  reports:[],
+  currentUser:null
+};
+
+// ---- ROTAS ----
+const Router=createContext({page:'landing',navigate:()=>{}});
+
+function App(){
+  const[page,setPage]=useState('landing');
+  const[ageVerified,setAgeVerified]=useState(localStorage.getItem('hl_age_verified')==='true');
+  const[user,setUser]=useState(null);
+  const[liveId,setLiveId]=useState(null);
+  const[loginUser,setLoginUser]=useState(null);
+
+  const navigate=(p,params)=>{setPage(p);if(params?.liveId)setLiveId(params.liveId);window.scrollTo(0,0);};
+  const login=(u)=>{setUser(u);DB.currentUser=u;navigate('home');};
+  const logout=()=>{setUser(null);DB.currentUser=null;navigate('landing');};
+  const verifyAge=()=>{setAgeVerified(true);localStorage.setItem('hl_age_verified','true');};
+
+  // Seed some chat messages
+  useEffect(()=>{
+    if(DB.lives[0].chat.length===0){
+      DB.lives[0].chat=[
+        {user:'fan_ana',text:'Oi amor! 💜',color:'#8a2be2'},
+        {user:'viewer_1',text:'Tá linda hoje!',color:'#ec4899'},
+        {user:'pedro_gamer',text:'Cheguei! 🔥',color:'#00e5ff'},
+        {user:'maria_arts',text:'Adoro suas lives',color:'#00e676'},
+        {user:'viewer_2',text:'Manda um beijo!',color:'#ffd600'}
+      ];
+    }
+  },[]);
+
+  return(
+    <Router.Provider value={{page,navigate,user,login,logout,liveId}}>
+      {!ageVerified&&<AgeGate onVerify={verifyAge}/>}
+      <div style={{display:ageVerified?'block':'none'}}>
+        <Nav user={user} onLogout={logout} page={page} navigate={navigate}/>
+        {page==='landing'&&<LandingPage navigate={navigate}/>}
+        {page==='auth'&&<AuthPage onLogin={login}/>}
+        {page==='home'&&<HomePage/>}
+        {page==='live'&&<LivePage liveId={liveId} user={user}/>}
+        {page==='dashboard'&&<DashboardPage user={user}/>}
+        {page==='wallet'&&<WalletPage user={user}/>}
+        {page==='admin'&&<AdminPage/>}
+        {page==='ranking'&&<RankingPage/>}
+        <Footer/>
+      </div>
+    </Router.Provider>
+  );
+}
+
+/* ---- AGE GATE ---- */
+function AgeGate({onVerify}){
+  return(
+    <div className="agegate">
+      <div className="agegate-box">
+        <div className="age-icon">🔞</div>
+        <h1><span className="p">HYPE</span> <span className="pk">LIVE</span> <span style={{color:'#ff2d2d',fontSize:'16px',verticalAlign:'super'}}>18+</span></h1>
+        <div className="warn">Este site contém conteúdo para <strong style={{color:'#fff'}}>maiores de 18 anos</strong>.</div>
+        <div className="warn">Ao continuar, você confirma que tem <strong style={{color:'#fff'}}>18 anos ou mais</strong> e concorda com nossos termos de uso.</div>
+        <div className="age-select">
+          <button className="age-btn age-yes" onClick={onVerify}>✅ Tenho 18+ anos</button>
+          <button className="age-btn age-no" onClick={()=>window.location.href='https://google.com'}>❌ Sou menor</button>
+        </div>
+        <div className="rules">Ao acessar, você concorda com nossos <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>. Conteúdo com menores é proibido e será reportado às autoridades.</div>
+      </div>
+    </div>
+  );
+}
+
+/* ---- NAV ---- */
+function Nav({user,onLogout,page,navigate}){
+  return(
+    <nav className="nav">
+      <div className="nav-logo" style={{cursor:'pointer'}} onClick={()=>navigate(user?'home':'landing')}>HYPE<span>LIVE</span></div>
+      <div className="nav-links">
+        {user?(
+          <>
+            <a className={page==='home'?'active':''} onClick={()=>navigate('home')}>🏠 Início</a>
+            <a className={page==='dashboard'?'active':''} onClick={()=>navigate('dashboard')}>📊 Dashboard</a>
+            <a className={page==='ranking'?'active':''} onClick={()=>navigate('ranking')}>🏆 Ranking</a>
+            {user.username==='client1'&&<a className={page==='admin'?'active':''} onClick={()=>navigate('admin')}>⚙️ Admin</a>}
+            <a onClick={()=>navigate('wallet')}>💰 Carteira</a>
+            <div style={{display:'flex',alignItems:'center',gap:8}}>
+              <div className="nav-avatar" style={{background:user.avatar}}>{user.name[0]}</div>
+              <span style={{fontSize:13,fontWeight:700,color:'#fff'}}>{user.name}</span>
+              <button className="btn btn-sm btn-outline" onClick={onLogout} style={{marginLeft:4}}>Sair</button>
+            </div>
+          </>
+        ):(
+          <>
+            <a onClick={()=>navigate('home')}>Início</a>
+            <button className="btn btn-sm btn-purple" onClick={()=>navigate('auth')}>Entrar</button>
+          </>
+        )}
+      </div>
+    </nav>
+  );
+}
+
+/* ---- LANDING ---- */
+function LandingPage({navigate}){
+  return(
+    <div className="page">
+      <section className="hero">
+        <div className="hero-content">
+          <div className="hero-18">🔞 Conteúdo 18+ · Verificação obrigatória</div>
+          <h1><span className="p">Conecte.</span> <span className="pk">Interaja.</span> <span className="g">Ganhe.</span></h1>
+          <p>A plataforma de live streaming onde criadores ganham dinheiro com presentes reais. Comece agora e construa sua audiência.</p>
+          <div className="hero-btns">
+            <button className="btn btn-purple" onClick={()=>navigate('auth')}>🚀 Começar Agora</button>
+            <button className="btn btn-outline" onClick={()=>navigate('home')}>▶️ Ver Lives</button>
+          </div>
+        </div>
+      </section>
+
+      <section className="features">
+        <h2>Como <span className="p">funciona</span></h2>
+        <div className="feat-grid">
+          <div className="feat-card"><div className="feat-icon">🎬</div><h3>Comece sua Live</h3><p>Inicie uma transmissão ao vivo com uma clique. Escolha sua categoria e conecte com milhares de espectadores.</p></div>
+          <div className="feat-card"><div className="feat-icon">🎁</div><h3>Presentes Reais</h3><p>Seus fãs enviam presentes durante a live. Cada presente tem valor real em reais que vai direto para seu saldo.</p></div>
+          <div className="feat-card"><div className="feat-icon">💰</div><h3>Ganhe Dinheiro</h3><p>Receba 70% do valor de cada presente. Saque via PIX a qualquer momento. Sem burocracia.</p></div>
+          <div className="feat-card"><div className="feat-icon">🛡️</div><h3>Seguro e Moderado</h3><p>Moderação 24h, verificação de idade, sistema de denúncias. Ambiente seguro para criadores e espectadores.</p></div>
+          <div className="feat-card"><div className="feat-icon">🏆</div><h3>Ranking Semanal</h3><p>Compete com outros criadores e suba no ranking. Os top criadores ganham destaque na plataforma.</p></div>
+          <div className="feat-card"><div className="feat-icon">📱</div><h3>Mobile First</h3><p>Experiência otimizada para celular. Lives, chat e envio de presentes funcionam perfeitamente no mobile.</p></div>
+        </div>
+      </section>
+
+      <section className="features">
+        <h2>Lives <span className="p">ao vivo</span> agora</h2>
+        <div className="feat-grid">
+          {DB.lives.map(live=>{
+            const creator=DB.users.find(u=>u.id===live.creatorId);
+            return(
+              <div key={live.id} className="feat-card" style={{cursor:'pointer',position:'relative',overflow:'hidden'}} onClick={()=>navigate('live',{liveId:live.id})}>
+                <div style={{position:'absolute',top:12,left:12,zIndex:1}}><span className="badge badge-red" style={{animation:'pulse 2s infinite'}}>🔴 AO VIVO</span></div>
+                <div style={{position:'absolute',top:12,right:12,zIndex:1}}><span className="badge badge-purple">👁️ {live.viewers}</span></div>
+                <div style={{width:'100%',height:160,borderRadius:12,background:`linear-gradient(135deg,${creator.avatar}33,#111)`,display:'flex',align-items:'center',justify-content:'center',marginBottom:12}}>
+                  <div style={{width:60,height:60,borderRadius:'50%',background:creator.avatar,display:'flex',alignItems:'center',justify-content:'center',fontSize:24,fontWeight:700,color:'#fff'}}>{creator.name[0]}</div>
+                </div>
+                <h3 style={{fontSize:16,fontWeight:700,color:'#fff',marginBottom:4}}>{live.title}</h3>
+                <p style={{fontSize:13,color:'var(--text2)'}}>📺 {creator.name} · {live.category}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="features" style={{textAlign:'center'}}>
+        <h2>Presentes <span className="p">e valores</span></h2>
+        <p style={{color:'var(--text2)',marginBottom:32}}>Envie presentes durante as lives e apoie seus criadores favoritos</p>
+        <div style={{display:'flex',gap:16,justifyContent:'center',flexWrap:'wrap'}}>
+          {DB.gifts.map(g=>(
+            <div key={g.id} style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:16,padding:24,textAlign:'center',minWidth:120}}>
+              <div style={{fontSize:40}}>{g.emoji}</div>
+              <div style={{fontWeight:700,marginTop:8,color:'#fff'}}>{g.name}</div>
+              <div style={{color:'var(--gold)',fontWeight:700,fontSize:18,marginTop:4}}>R$ {g.price}</div>
+              <div style={{color:'var(--text2)',fontSize:11}}>{g.coins} moedas</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+/* ---- AUTH ---- */
+function AuthPage({onLogin}){
+  const[tab,setTab]=useState('login');
+  const[error,setError]=useState('');
+  const[form,setForm]=useState({username:'',email:'',password:'',password2:'',name:'',age:''});
+
+  const handleLogin=()=>{
+    const user=DB.users.find(u=>u.email===form.email&&u.password===form.password);
+    if(!user){setError('Email ou senha incorretos');return;}
+    if(user.banned){setError('Conta banida');return;}
+    onLogin(user);
+  };
+
+  const handleRegister=()=>{
+    if(!form.username||!form.email||!form.password||!form.name||!form.age){setError('Preencha todos os campos');return;}
+    if(parseInt(form.age)<18){setError('Somente maiores de 18 anos');return;}
+    if(form.password!==form.password2){setError('Senhas não conferem');return;}
+    if(DB.users.find(u=>u.email===form.email)){setError('Email já cadastrado');return;}
+    const newUser={
+      id:DB.users.length+1,username:form.username,name:form.name,email:form.email,
+      password:form.password,age:parseInt(form.age),bio:'',avatar:'#8a2be2',
+      coins:100,totalEarned:0,followers:0,isCreator:false,banned:false,balance:0
+    };
+    DB.users.push(newUser);
+    onLogin(newUser);
+  };
+
+  return(
+    <div className="auth-page page">
+      <div className="auth-box">
+        <h2>Bem-vindo ao <span className="p">HYPE LIVE</span></h2>
+        <div className="auth-tabs">
+          <div className={`auth-tab ${tab==='login'?'active':''}`} onClick={()=>{setTab('login');setError('');}}>Entrar</div>
+          <div className={`auth-tab ${tab==='register'?'active':''}`} onClick={()=>{setTab('register');setError('');}}>Cadastrar</div>
+        </div>
+        {error&&<div className="form-error" style={{marginBottom:16,textAlign:'center',padding:8,background:'rgba(255,45,45,.1)',borderRadius:8}}>{error}</div>}
+        {tab==='login'?(
+          <>
+            <div className="form-group"><label>Email</label><input type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="seu@email.com"/></div>
+            <div className="form-group"><label>Senha</label><input type="password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})} placeholder="••••••"/></div>
+            <button className="btn btn-purple" style={{width:'100%',justifyContent:'center',padding:14}} onClick={handleLogin}>Entrar</button>
+            <p style={{textAlign:'center',marginTop:12,fontSize:12,color:'var(--text2)'}}>Teste: cli@test.com / 1234</p>
+          </>
+        ):(
+          <>
+            <div className="form-group"><label>Nome completo</label><input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} placeholder="Seu nome"/></div>
+            <div className="form-group"><label>Username</label><input value={form.username} onChange={e=>setForm({...form,username:e.target.value})} placeholder="@seuuser"/></div>
+            <div className="form-group"><label>Email</label><input type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="seu@email.com"/></div>
+            <div className="form-group"><label>Data de nascimento</label><input type="date" value={form.age} onChange={e=>setForm({...form,age:e.target.value})}/></div>
+            <div className="form-group"><label>Senha</label><input type="password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})} placeholder="Mínimo 6 caracteres"/></div>
+            <div className="form-group"><label>Confirmar senha</label><input type="password" value={form.password2} onChange={e=>setForm({...form,password2:e.target.value})} placeholder="Repita a senha"/></div>
+            <div style={{fontSize:11,color:'var(--text2)',marginBottom:12,lineHeight:1.5}}>Ao criar conta, você confirma ter 18+ anos e concorda com nossos <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.</div>
+            <button className="btn btn-purple" style={{width:'100%',justifyContent:'center',padding:14}} onClick={handleRegister}>Criar Conta</button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ---- HOME ---- */
+function HomePage(){
+  const{navigate}=useContext(Router);
+  return(
+    <div className="page" style={{paddingTop:76}}>
+      <div style={{maxWidth:1100px,margin:'0 auto',padding:'0 20px'}}>
+        <h2 style={{fontSize:24,fontWeight:900,marginBottom:24}}>🔥 Lives <span style={{color:'var(--purple2)'}}>ao vivo</span></h2>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))',gap:16}}>
+          {DB.lives.map(live=>{
+            const creator=DB.users.find(u=>u.id===live.creatorId);
+            const elapsed=Math.floor((Date.now()-live.startedAt)/60000);
+            return(
+              <div key={live.id} style={{background:'var(--card)',border:'1px solid var(--border)',borderRadius:16,overflow:'hidden',cursor:'pointer',transition:'all .3s'}} onClick={()=>navigate('live',{liveId:live.id})}
+                onMouseEnter={e=>{e.currentTarget.style.borderColor='var(--purple)';e.currentTarget.style.transform='translateY(-3px)';}}
+                onMouseLeave={e=>{e.currentTarget.style.borderColor='var(--border)';e.currentTarget.style.transform='none';}}>
+                <div style={{height:200,background:`linear-gradient(135deg,${creator.avatar}44,#111)`,position:'relative',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <div style={{position:'absolute',top:10,left:10}}><span className="badge badge-red" style={{animation:'pulse 2s infinite'}}>🔴 AO VIVO</span></div>
+                  <div style={{position:'absolute',top:10,right:10}}><span className="badge badge-purple">👁️ {live.viewers}</span></div>
+                  <div style={{width:64,height:64,borderRadius:'50%',background:creator.avatar,display:'flex',alignItems:'center',justifyContent:'center',fontSize:28,fontWeight:700,color:'#fff'}}>{creator.name[0]}</div>
+                </div>
+                <div style={{padding:16}}>
+                  <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
+                    <span style={{fontWeight:700,color:'#fff',fontSize:15}}>{creator.name}</span>
+                    <span className="badge badge-purple" style={{fontSize:10}}>{live.category}</span>
+                  </div>
+                  <div style={{fontSize:13,color:'var(--text2)'}}>{live.title}</div>
+                  <div style={{fontSize:11,color:'var(--text2)',marginTop:6}}>⏱️ {elapsed}min · {live.viewers} assistindo</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---- LIVE ---- */
+function LivePage({liveId,user}){
+  const{navigate}=useContext(Router);
+  const live=DB.lives.find(l=>l.id===liveId)||DB.lives[0];
+  const creator=DB.users.find(u=>u.id===live.creatorId);
+  const[chatInput,setChatInput]=useState('');
+  const[chatMessages,setChatMessages]=useState([...live.chat]);
+  const[selectedGift,setSelectedGift]=useState(null);
+  const[viewers,setViewers]=useState(live.viewers);
+  const[showGiftAnim,setShowGiftAnim]=useState(null);
+  const[following,setFollowing]=useState(false);
+  const chatRef=useRef(null);
+
+  // Auto-scroll chat
+  useEffect(()=>{
+    if(chatRef.current)chatRef.current.scrollTop=chatRef.current.scrollHeight;
+  },[chatMessages]);
+
+  // Simular chat
+  useEffect(()=>{
+    const msgs=['Alguém aí? 🔥','Essa live é TOP','manda um beijo! 💜','Cheguei!','Tá demais 😍','Muito bom!','Quero presente kkk','Show! 🎉','Adoro essa live','Manda emoção!'];
+    const names=['fan_1','viewer_42','user_99','bot_hype','fan_23','viewer_7','user_44','live_fan','watcher_1','hype_bot'];
+    const colors=['#8a2be2','#ec4899','#00e5ff','#00e676','#ffd600','#ff6b00','#ce93d8','#4fc3f7'];
+    const interval=setInterval(()=>{
+      const newMsg={user:names[Math.floor(Math.random()*names.length)],text:msgs[Math.floor(Math.random()*msgs.length)],color:colors[Math.floor(Math.random()*colors.length)]};
+      setChatMessages(prev=>[...prev.slice(-50),newMsg]);
+      setViewers(v=>v+Math.floor(Math.random()*3)-1);
+    },2000+Math.random()*3000);
+    return()=>clearInterval(interval);
+  },[]);
+
+  const sendChat=()=>{
+    if(!chatInput.trim()||!user)return;
+    const banned=['palavrão','lixo','idiota'];
+    if(banned.some(w=>chatInput.toLowerCase().includes(w)))return;
+    setChatMessages(prev=>[...prev,{user:user.username,text:chatInput,color:user.avatar}]);
+    setChatInput('');
+  };
+
+  const sendGift=()=>{
+    if(!selectedGift||!user)return;
+    const gift=DB.gifts.find(g=>g.id===selectedGift);
+    if(!gift||user.coins<gift.coins)return;
+    user.coins-=gift.coins;
+    creator.coins+=Math.floor(gift.coins*0.7);
+    creator.balance+=gift.price*0.7;
+    DB.transactions.push({id:Date.now(),type:'gift',from:user.username,to:creator.username,gift:gift.name,amount:gift.price,date:new Date().toLocaleString()});
+    setChatMessages(prev=>[...prev.slice(-50),{user:user.username,text:`Enviou ${gift.emoji} ${gift.name} (R$${gift.price})`,color:'#ec4899',isGift:true}]);
+    setShowGiftAnim(gift.emoji);
+    setTimeout(()=>setShowGiftAnim(null),1500);
+    setSelectedGift(null);
+  };
+
+  return(
+    <div className="live-page">
+      <div className="live-layout">
+        {/* VIDEO AREA */}
+        <div className="live-video">
+          <div style={{width:'100%',height:'100%',background:`linear-gradient(135deg,${creator.avatar}22,#0a0a0f,#111)`,display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column',gap:12}}>
+            <div style={{width:80,height:80,borderRadius:'50%',background:creator.avatar,display:'flex',alignItems:'center',justifyContent:'center',fontSize:36,fontWeight:700,color:'#fff'}}>{creator.name[0]}</div>
+            <div style={{color:'#fff',fontSize:18,fontWeight:700}}>{live.title}</div>
+            <div style={{color:'var(--text2)',fontSize:13}}>🔴 AO VIVO · {viewers} assistindo</div>
+          </div>
+          {/* OVERLAYS */}
+          <div className="live-overlay">
+            <div className="live-info">
+              <div className="live-badge">🔴 AO VIVO</div>
+              <div className="live-viewers">👁️ {viewers}</div>
+              <div className="badge badge-purple">{live.category}</div>
+            </div>
+            <div className="live-creator">
+              <div className="avatar" style={{background:creator.avatar}}/>
+              <div>
+                <div className="name">{creator.name}</div>
+                <div style={{fontSize:11,color:'var(--text2)'}}>👤 {creator.followers} seguidores</div>
+              </div>
+              {user&&user.id!==creator.id&&(
+                <button className="follow" onClick={()=>setFollowing(!following)} style={{background:following?'var(--bg3)':'var(--purple)',border:following?'1px solid var(--border)':'none'}}>
+                  {following?'✓ Seguindo':'Seguir'}
+                </button>
+              )}
+            </div>
+            <div className="live-report">
+              <button onClick={()=>{DB.reports.push({liveId:live.id,by:user?.username||'anon',date:new Date().toLocaleString()});alert('Denúncia enviada! Obrigado.');}}>⚠️ Denunciar Live</button>
+            </div>
+          </div>
+          {/* GIFT ANIMATION */}
+          {showGiftAnim&&<div className="gift-anim" style={{left:'50%',top:'40%'}}>{showGiftAnim}</div>}
+        </div>
+
+        {/* CHAT */}
+        <div className="live-chat">
+          <div className="chat-header">
+            <span>💬 Chat ao vivo</span>
+            <span style={{fontSize:12,color:'var(--text2)'}}>{viewers} online</span>
+          </div>
+          <div className="chat-messages" ref={chatRef}>
+            <div className="chat-msg system"><div className="body"><div className="text">📺 {creator.name} iniciou a live: {live.title}</div></div></div>
+            {chatMessages.map((msg,i)=>(
+              <div key={i} className={`chat-msg ${msg.isGift?'gift':''}`}>
+                <div className="avatar" style={{background:msg.color}}>{msg.user[0].toUpperCase()}</div>
+                <div className="body">
+                  <div className="author" style={{color:msg.color}}>{msg.user}</div>
+                  <div className="text">{msg.isGift?'🎁 ':''}{msg.text}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* GIFTS */}
+          {user&&(
+            <div className="gifts-panel">
+              <div className="gifts-scroll">
+                {DB.gifts.map(g=>(
+                  <div key={g.id} className={`gift-item ${selectedGift===g.id?'selected':''}`} onClick={()=>setSelectedGift(g.id)}>
+                    <div className="gift-emoji">{g.emoji}</div>
+                    <div className="gift-name">{g.name}</div>
+                    <div className="gift-price">R$ {g.price}</div>
+                  </div>
+                ))}
+              </div>
+              {selectedGift&&(
+                <button className="gift-send" onClick={sendGift}>
+                  🎁 Enviar {DB.gifts.find(g=>g.id===selectedGift)?.name} · R$ {DB.gifts.find(g=>g.id===selectedGift)?.price}
+                </button>
+              )}
+            </div>
+          )}
+          {/* CHAT INPUT */}
+          <div className="chat-input">
+            <input value={chatInput} onChange={e=>setChatInput(e.target.value)} onKeyDown={e=>e.key==='Enter'&&sendChat()} placeholder={user?'Digite uma mensagem...':'Faça login para chat'}/>
+            <button onClick={sendChat} disabled={!user}>Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---- DASHBOARD ---- */
+function DashboardPage({user}){
+  const{navigate}=useContext(Router);
+  if(!user){navigate('auth');return null;}
+  const myLives=DB.lives.filter(l=>l.creatorId===user.id);
+  const myTx=DB.transactions.filter(t=>t.to===user.username);
+
+  return(
+    <div className="dash page">
+      <h1>📊 <span className="p">Dashboard</span></h1>
+      <div className="dash-grid">
+        <div className="dash-card purple"><div className="dc-icon">💰</div><div className="dc-num">R$ {user.balance.toLocaleString()}</div><div className="dc-label">Saldo Disponível</div></div>
+        <div className="dash-card gold"><div className="dc-icon">🎁</div><div className="dc-num">R$ {user.totalEarned.toLocaleString()}</div><div className="dc-label">Total Ganho</div></div>
+        <div className="dash-card green"><div className="dc-icon">👤</div><div className="dc-num">{user.followers.toLocaleString()}</div><div className="dc-label">Seguidores</div></div>
+        <div className="dash-card pink"><div className="dc-icon">🪙</div><div className="dc-num">{user.coins.toLocaleString()}</div><div className="dc-label">Moedas</div></div>
+      </div>
+
+      <div style={{display:'flex',gap:12,marginBottom:24}}>
+        <button className="btn btn-purple" onClick={()=>navigate('wallet')}>💰 Sacar via PIX</button>
+        <button className="btn btn-outline" onClick={()=>navigate('ranking')}>🏆 Ver Ranking</button>
+      </div>
+
+      <div className="dash-section">
+        <h3>🔴 Minhas Lives</h3>
+        {myLives.length===0?<p style={{color:'var(--text2)',fontSize:14}}>Nenhuma live ainda. Comece uma!</p>:(
+          <table className="dash-table">
+            <thead><tr><th>Título</th><th>Categoria</th><th>Viewers</th><th>Status</th></tr></thead>
+            <tbody>
+              {myLives.map(l=>(
+                <tr key={l.id}><td style={{color:'#fff',fontWeight:600}}>{l.title}</td><td><span className="badge badge-purple">{l.category}</span></td><td>👁️ {l.viewers}</td><td><span className="badge badge-red">AO VIVO</span></td></tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      <div className="dash-section">
+        <h3>📋 Histórico de Ganhos</h3>
+        {myTx.length===0?<p style={{color:'var(--text2)',fontSize:14}}>Nenhuma transação ainda.</p>:(
+          <table className="dash-table">
+            <thead><tr><th>Data</th><th>De</th><th>Presente</th><th>Valor</th></tr></thead>
+            <tbody>
+              {myTx.map(t=>(
+                <tr key={t.id}><td style={{color:'var(--text2)'}}>{t.date}</td><td style={{color:'var(--purple2)',fontWeight:600}}>{t.from}</td><td>🎁 {t.gift}</td><td style={{color:'var(--green)',fontWeight:700}}>+R$ {t.amount}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ---- WALLET ---- */
+function WalletPage({user}){
+  const{navigate}=useContext(Router);
+  const[tab,setTab]=useState('buy');
+  const[amount,setAmount]=useState('');
+  if(!user){navigate('auth');return null;}
+
+  const coinPacks=[
+    {coins:100,price:10,bonus:null},
+    {coins:500,price:45,bonus:'+10%'},
+    {coins:1000,price:80,bonus:'+20%'},
+    {coins:5000,price:350,bonus:'+30%'},
+    {coins:10000,price:650,bonus:'+40%'}
+  ];
+
+  const buyCoins=(pack)=>{
+    user.coins+=Math.floor(pack.coins*(1+(parseInt(pack.bonus?.replace(/[^0-9]/g,'')||0)/100)));
+    DB.transactions.push({id:Date.now(),type:'purchase',from:'Sistema',to:user.username,gift:'Compra de moedas',amount:pack.price,date:new Date().toLocaleString()});
+    alert(`✅ Compra realizada! +${pack.coins} moedas creditadas.`);
+  };
+
+  return(
+    <div className="dash page">
+      <h1>💰 <span className="p">Carteira</span></h1>
+
+      <div className="wallet-balance">
+        <div className="wb-label">Seu Saldo</div>
+        <div className="wb-amount">R$ {user.balance.toLocaleString()}</div>
+        <div style={{fontSize:13,color:'var(--text2)',marginBottom:16}}>🪙 {user.coins.toLocaleString()} moedas disponíveis</div>
+        <div className="wallet-actions">
+          <button className="btn btn-green" onClick={()=>setTab('buy')}>🛒 Comprar Moedas</button>
+          <button className="btn btn-gold" onClick={()=>setTab('withdraw')}>💸 Sacar PIX</button>
+        </div>
+      </div>
+
+      {tab==='buy'&&(
+        <div className="dash-section">
+          <h3>🛒 Comprar Moedas</h3>
+          <p style={{color:'var(--text2)',fontSize:13,marginBottom:16}}>Use PIX ou Cartão para comprar moedas e enviar presentes nas lives.</p>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:12}}>
+            {coinPacks.map((p,i)=>(
+              <div key={i} className="coin-pack" onClick={()=>buyCoins(p)}>
+                <div style={{fontSize:28}}>🪙</div>
+                <div className="cp-amount">{p.coins.toLocaleString()}</div>
+                <div className="cp-price">R$ {p.price}</div>
+                {p.bonus&&<div className="cp-bonus">🎁 Bônus {p.bonus}</div>}
+              </div>
+            ))}
+          </div>
+          <div style={{textAlign:'center',marginTop:16,fontSize:12,color:'var(--text2)'}}>Pagamento via PIX ou Cartão de Crédito (Stripe Connect)</div>
+        </div>
+      )}
+
+      {tab==='withdraw'&&(
+        <div className="dash-section">
+          <h3>💸 Sacar via PIX</h3>
+          <p style={{color:'var(--text2)',fontSize:13,marginBottom:16}}>Saldo mínimo para saque: R$ 50,00</p>
+          <div className="form-group"><label>Chave PIX (CPF, Email ou Aleatória)</label><input value={user.email} readOnly style={{opacity:.7}}/></div>
+          <div className="form-group"><label>Valor do Saque</label><input type="number" value={amount} onChange={e=>setAmount(e.target.value)} placeholder="R$ 0,00" min="50"/></div>
+          <button className="btn btn-gold" onClick={()=>{if(parseFloat(amount)>=50&&parseFloat(amount)<=user.balance){user.balance-=parseFloat(amount);alert(`✅ Saque de R$ ${amount} solicitado! Chegará em até 24h.`);setAmount('');}else{alert('Valor inválido ou saldo insuficiente.');}}}>
+            Solicitar Saque
+          </button>
+          <div style={{marginTop:12,fontSize:11,color:'var(--text2)'}}>Receba 70% do valor dos presentes. Saque processado via PIX em até 24h.</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ---- RANKING ---- */
+function RankingPage(){
+  const creators=DB.users.filter(u=>u.isCreator).sort((a,b)=>b.totalEarned-a.totalEarned);
+  return(
+    <div className="dash page">
+      <h1>🏆 <span className="p">Ranking Semanal</span></h1>
+      <p style={{color:'var(--text2)',marginBottom:24}}>Os criadores que mais ganharam presentes esta semana</p>
+      {creators.map((c,i)=>(
+        <div key={c.id} className="rank-item">
+          <div className={`rank-pos ${i===0?'r1':i===1?'r2':i===2?'r3':''}`}>#{i+1}</div>
+          <div className="rank-avatar" style={{background:c.avatar}}>{c.name[0]}</div>
+          <div className="rank-info">
+            <div className="rank-name">{c.name}</div>
+            <div className="rank-earn">👤 {c.followers} seguidores · {c.totalEarned} moedas ganhas</div>
+          </div>
+          <div className="rank-amount">R$ {(c.totalEarned*0.7).toLocaleString()}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ---- ADMIN ---- */
+function AdminPage(){
+  const[bannedUsers,setBannedUsers]=useState([]);
+  const totalUsers=DB.users.length;
+  const totalLives=DB.lives.length;
+  const totalCoins=DB.users.reduce((s,u)=>s+u.coins,0);
+  const totalReports=DB.reports.length;
+
+  const banUser=(uid)=>{
+    const u=DB.users.find(u=>u.id===uid);
+    if(u){u.banned=true;setBannedUsers([...bannedUsers,uid]);}
+  };
+
+  return(
+    <div className="dash page">
+      <h1>⚙️ <span className="p">Painel Admin</span></h1>
+
+      <div className="dash-grid">
+        <div className="dash-card purple"><div className="dc-icon">👥</div><div className="dc-num">{totalUsers}</div><div className="dc-label">Usuários</div></div>
+        <div className="dash-card pink"><div className="dc-icon">🔴</div><div className="dc-num">{totalLives}</div><div className="dc-label">Lives Ativas</div></div>
+        <div className="dash-card gold"><div className="dc-icon">🪙</div><div className="dc-num">{totalCoins.toLocaleString()}</div><div className="dc-label">Total Moedas</div></div>
+        <div className="dash-card" style={{borderColor:'var(--red)'}}><div className="dc-icon">⚠️</div><div className="dc-num">{totalReports}</div><div className="dc-label">Denúncias</div></div>
+      </div>
+
+      <div className="dash-section">
+        <h3>👥 Usuários</h3>
+        <table className="dash-table">
+          <thead><tr><th>Usuário</th><th>Email</th><th>Idade</th><th>Criador</th><th>Status</th><th>Ações</th></tr></thead>
+          <tbody>
+            {DB.users.map(u=>(
+              <tr key={u.id}>
+                <td style={{color:'#fff',fontWeight:600}}>{u.name}</td>
+                <td style={{color:'var(--text2)'}}>{u.email}</td>
+                <td>{u.age} anos</td>
+                <td>{u.isCreator?<span className="badge badge-purple">Criador</span>:'Espectador'}</td>
+                <td>{u.banned?<span className="badge badge-red">Banido</span>:<span className="badge badge-green">Ativo</span>}</td>
+                <td>{!u.banned&&<button className="btn btn-sm btn-red" onClick={()=>banUser(u.id)}>Banir</button>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="dash-section">
+        <h3>⚠️ Denúncias</h3>
+        {DB.reports.length===0?<p style={{color:'var(--text2)',fontSize:14}}>Nenhuma denúncia pendente.</p>:(
+          <table className="dash-table">
+            <thead><tr><th>Live</th><th>Reportado por</th><th>Data</th><th>Ações</th></tr></thead>
+            <tbody>
+              {DB.reports.map((r,i)=>(
+                <tr key={i}><td>Live #{r.liveId}</td><td>{r.by}</td><td style={{color:'var(--text2)'}}>{r.date}</td>
+                  <td><button className="btn btn-sm btn-red">Pausar Live</button> <button className="btn btn-sm btn-outline">Ignorar</button></td></tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      <div className="dash-section">
+        <h3>🛡️ Moderação Automática</h3>
+        <div className="admin-stat"><div className="as-icon">🚫</div><div className="as-info"><div className="as-num">Auto-ban ativo</div><div className="as-label">Filtro de palavras no chat: palavrão, lixo, idiota</div></div></div>
+        <div className="admin-stat"><div className="as-icon">📝</div><div className="as-info"><div className="as-num">Regras da Plataforma</div><div className="as-label">Conteúdo com menores é proibido. Denúncias são investigadas em até 24h.</div></div></div>
+        <div className="admin-stat"><div className="as-icon">🔒</div><div className="as-info"><div className="as-num">KYC Obrigatório</div><div className="as-label">Verificação de documento + selfie + data de nascimento</div></div></div>
+      </div>
+    </div>
+  );
+}
+
+/* ---- FOOTER ---- */
+function Footer(){
+  return(
+    <footer>
+      <p>© 2025 HYPE LIVE · Plataforma de live streaming para maiores de 18 anos</p>
+      <p style={{marginTop:4}}>Conteúdo com menores é proibido. Moderação 24h. Denúncias investigadas.</p>
+      <div className="f-links">
+        <a href="#">Termos de Uso</a>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">LGPD</a>
+        <a href="#">Contato</a>
+      </div>
+    </footer>
+  );
+}
+
+/* ---- RENDER ---- */
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
