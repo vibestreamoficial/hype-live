@@ -4,223 +4,194 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>HYPE LIVE 18+ - Live Streaming</title>
-<meta name="description" content="Plataforma de live streaming para maiores de 18 anos.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{background:#0a0a0a}
-body{background:#0a0a0a;min-height:100vh;color:#e0e0e0;font-family:'Inter',sans-serif;overflow-x:hidden}
+html,body{background:#0a0a0a;color:#e0e0e0;font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#8a2be2;border-radius:3px}
 button{font-family:'Inter',sans-serif;cursor:pointer;border:none;outline:none}
-input,textarea,select{font-family:'Inter',sans-serif;outline:none}
+input{font-family:'Inter',sans-serif;outline:none}
+a{color:#a855f7;text-decoration:none}
 .page{min-height:100vh;padding-bottom:60px}
+.hidden{display:none!important}
 
 /* AGE GATE */
 .agegate{position:fixed;inset:0;z-index:2000;background:#0a0a0a;display:flex;align-items:center;justify-content:center}
-.age-box{background:#14141e;border:1px solid #2a2a38;border-radius:24px;padding:40px 32px;text-align:center;max-width:420px;width:90%}
-.age-box h1{font-size:28px;font-weight:900;margin-bottom:12px}
-.age-box .icon{font-size:44px;margin-bottom:12px}
-.age-box .warn{font-size:14px;color:#888;line-height:1.6;margin-bottom:8px}
-.age-box .warn strong{color:#fff}
-.age-btns{display:flex;gap:12px;margin:24px 0 16px}
-.age-btns button{flex:1;padding:14px;border-radius:12px;font-size:15px;font-weight:700;transition:.3s}
-.age-yes{background:linear-gradient(135deg,#8a2be2,#ec4899);color:#fff}
-.age-yes:hover{box-shadow:0 8px 30px rgba(138,43,226,.4)}
-.age-no{background:#1a1a24;color:#888;border:1px solid #2a2a38}
-.age-rules{font-size:10px;color:#555;line-height:1.5}
-.age-rules a{color:#8a2be2}
+.agebox{background:#14141e;border:1px solid #2a2a38;border-radius:24px;padding:40px 32px;text-align:center;max-width:420px;width:92%}
+.agebox h1{font-size:28px;font-weight:900;margin-bottom:12px}
+.agebox .icon{font-size:44px;margin-bottom:12px}
+.agebox .warn{font-size:14px;color:#888;line-height:1.6;margin-bottom:6px}
+.agebox .warn strong{color:#fff}
+.agebtns{display:flex;gap:12px;margin:24px 0 16px}
+.agebtns button{flex:1;padding:14px;border-radius:12px;font-size:15px;font-weight:700;transition:.3s}
+.ageyes{background:linear-gradient(135deg,#8a2be2,#ec4899);color:#fff}
+.ageyes:hover{box-shadow:0 8px 30px rgba(138,43,226,.4)}
+.ageno{background:#1a1a24;color:#888;border:1px solid #2a2a38}
+.agerules{font-size:10px;color:#555;line-height:1.5}
 
 /* NAV */
-.nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid #1a1a24;height:56px;display:flex;align-items:center;justify-content:0px;padding:0 16px}
-.nav-logo{font-size:20px;font-weight:900;color:#a855f7;cursor:pointer}.nav-logo span{color:#ec4899}
-.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-.nav-link{color:#888;font-size:13px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;transition:.3s}
-.nav-link:hover,.nav-link.on{color:#a855f7;background:rgba(138,43,226,.1)}
-.nav-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;cursor:pointer}
+.nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid #1a1a24;height:56px;display:flex;align-items:center;padding:0 16px}
+.navlogo{font-size:20px;font-weight:900;color:#a855f7;cursor:pointer}.navlogo b{color:#ec4899}
+.navright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.navlink{color:#888;font-size:13px;font-weight:600;padding:6px 10px;border-radius:8px;cursor:pointer;transition:.3s}
+.navlink:hover,.navlink.on{color:#a855f7;background:rgba(138,43,226,.1)}
+.navav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;cursor:pointer}
 
 /* BUTTONS */
 .btn{padding:12px 24px;border-radius:12px;font-weight:700;font-size:14px;transition:.2s;display:inline-flex;align-items:center;gap:8px}
-.btn-p{background:linear-gradient(135deg,#8a2be2,#ec4899);color:#fff;box-shadow:0 4px 20px rgba(138,43,226,.3)}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(138,43,226,.5)}
-.btn-o{background:transparent;color:#a855f7;border:2px solid #8a2be2}
-.btn-o:hover{background:#8a2be2;color:#fff}
-.btn-sm{padding:8px 14px;font-size:12px;border-radius:8px}
-.btn-g{background:#00e676;color:#000}
-.btn-r{background:#ff2d2d;color:#fff}
-.btn-gold{background:linear-gradient(135deg,#ffd600,#ff9800);color:#000}
+.btnp{background:linear-gradient(135deg,#8a2be2,#ec4899);color:#fff;box-shadow:0 4px 20px rgba(138,43,226,.3)}
+.btnp:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(138,43,226,.5)}
+.btno{background:transparent;color:#a855f7;border:2px solid #8a2be2}
+.btno:hover{background:#8a2be2;color:#fff}
+.btnsm{padding:8px 14px;font-size:12px;border-radius:8px}
+.btng{background:#00e676;color:#000}
+.btnr{background:#ff2d2d;color:#fff}
+.btngold{background:linear-gradient(135deg,#ffd600,#ff9800);color:#000}
 
 /* BADGE */
 .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
-.b-red{background:rgba(255,45,45,.15);color:#ff2d2d}
-.b-purple{background:rgba(138,43,226,.15);color:#a855f7}
-.b-green{background:rgba(0,230,118,.15);color:#00e676}
-.b-gold{background:rgba(255,214,0,.15);color:#ffd600}
-
-/* SKELETON */
-.skeleton{background:linear-gradient(90deg,#1a1a24 25%,#222233 50%,#1a1a24 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.bred{background:rgba(255,45,45,.15);color:#ff2d2d}
+.bpur{background:rgba(138,43,226,.15);color:#a855f7}
+.bgrn{background:rgba(0,230,118,.15);color:#00e676}
+.bgld{background:rgba(255,214,0,.15);color:#ffd600}
 
 /* LANDING */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 20px;position:relative}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(138,43,226,.07),transparent 60%);pointer-events:none}
-.hero-c{text-align:center;max-width:680px;position:relative;z-index:1}
-.hero-c h1{font-size:clamp(32px,7vw,56px);font-weight:900;line-height:1.1;margin-bottom:14px}
-.hero-c h1 .p{color:#a855f7}.hero-c h1 .pk{color:#ec4899}.hero-c h1 .g{color:#ffd600}
-.hero-c p{font-size:17px;color:#888;margin-bottom:28px;line-height:1.6}
-.hero-18{display:inline-flex;align-items:center;gap:6px;background:rgba(255,45,45,.08);border:1px solid rgba(255,45,45,.25);padding:6px 14px;border-radius:20px;font-size:12px;color:#ff2d2d;margin-bottom:20px}
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.features{max-width:1000px;margin:0 auto;padding:60px 20px}
-.features h2{text-align:center;font-size:28px;font-weight:900;margin-bottom:40px}.features h2 .p{color:#a855f7}
-.f-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.f-card{background:#14141e;border:1px solid #2a2a38;border-radius:16px;padding:24px;transition:.3s}
-.f-card:hover{border-color:#8a2be2;transform:translateY(-3px)}
-.f-card .fi{font-size:32px;margin-bottom:10px}
-.f-card h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:4px}
-.f-card p{font-size:13px;color:#888;line-height:1.5}
+.heroc{text-align:center;max-width:680px;position:relative;z-index:1}
+.heroc h1{font-size:clamp(32px,7vw,56px);font-weight:900;line-height:1.1;margin-bottom:14px}
+.heroc p{font-size:17px;color:#888;margin-bottom:28px;line-height:1.6}
+.hero18{display:inline-flex;align-items:center;gap:6px;background:rgba(255,45,45,.08);border:1px solid rgba(255,45,45,.25);padding:6px 14px;border-radius:20px;font-size:12px;color:#ff2d2d;margin-bottom:20px}
+.herobtns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.feat{max-width:1000px;margin:0 auto;padding:60px 20px}
+.feat h2{text-align:center;font-size:28px;font-weight:900;margin-bottom:40px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.fcard{background:#14141e;border:1px solid #2a2a38;border-radius:16px;padding:24px;transition:.3s}
+.fcard:hover{border-color:#8a2be2;transform:translateY(-3px)}
+.fcard .fi{font-size:32px;margin-bottom:10px}
+.fcard h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:4px}
+.fcard p{font-size:13px;color:#888;line-height:1.5}
 
 /* AUTH */
-.auth-p{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 16px}
-.auth-box{background:#14141e;border:1px solid #2a2a38;border-radius:20px;padding:32px;max-width:420px;width:100%}
-.auth-box h2{font-size:22px;font-weight:900;text-align:center;margin-bottom:20px}.auth-box h2 .p{color:#a855f7}
-.auth-tabs{display:flex;border-radius:10px;overflow:hidden;border:1px solid #2a2a38;margin-bottom:20px}
-.auth-tab{flex:1;padding:10px;text-align:center;font-weight:700;font-size:13px;cursor:pointer;background:#1a1a24;color:#888;transition:.3s}
-.auth-tab.on{background:#8a2be2;color:#fff}
+.authp{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 16px}
+.authbox{background:#14141e;border:1px solid #2a2a38;border-radius:20px;padding:32px;max-width:420px;width:100%}
+.authbox h2{font-size:22px;font-weight:900;text-align:center;margin-bottom:20px}
+.authtabs{display:flex;border-radius:10px;overflow:hidden;border:1px solid #2a2a38;margin-bottom:20px}
+.authtab{flex:1;padding:10px;text-align:center;font-weight:700;font-size:13px;cursor:pointer;background:#1a1a24;color:#888;transition:.3s}
+.authtab.on{background:#8a2be2;color:#fff}
 .fg{margin-bottom:14px}
 .fg label{display:block;font-size:12px;color:#888;margin-bottom:5px;font-weight:600}
 .fg input{width:100%;padding:11px 14px;background:#1a1a24;border:2px solid #2a2a38;border-radius:10px;color:#fff;font-size:14px;transition:.3s}
 .fg input:focus{border-color:#8a2be2}
-.f-err{color:#ff2d2d;font-size:12px;text-align:center;padding:8px;background:rgba(255,45,45,.08);border-radius:8px;margin-bottom:12px}
+.ferr{color:#ff2d2d;font-size:12px;text-align:center;padding:8px;background:rgba(255,45,45,.08);border-radius:8px;margin-bottom:12px}
 
-/* LIVE PAGE */
-.live-wrap{padding-top:56px;height:100vh;display:flex;flex-direction:column}
-.live-main{flex:1;display:flex;min-height:0}
-
-/* VIDEO PLAYER - DEMO MODE */
-.live-player{flex:1;background:#0a0a0a;position:relative;min-height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.live-player::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#8a2be220,#0a0a0a,#ec489910);animation:liveGrad 6s ease infinite}
-@keyframes liveGrad{0%,100%{background:linear-gradient(135deg,#8a2be220,#0a0a0a,#ec489910)}50%{background:linear-gradient(135deg,#ec489915,#0a0a0a,#8a2be225)}}
-.live-player video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
-.live-player .demo-overlay{position:relative;z-index:2;text-align:center;padding:20px}
-.live-player .demo-live-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#8a2be2,#ec4899);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;animation:pulse 2s infinite}
+/* LIVE */
+.livewrap{padding-top:56px;height:100vh;display:flex;flex-direction:column}
+.livemain{flex:1;display:flex;min-height:0}
+.liveplayer{flex:1;background:#0a0a0a;position:relative;min-height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.liveplayer::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#8a2be220,#0a0a0a,#ec489910);animation:lg 6s ease infinite}
+@keyframes lg{0%,100%{background:linear-gradient(135deg,#8a2be220,#0a0a0a,#ec489910)}50%{background:linear-gradient(135deg,#ec489915,#0a0a0a,#8a2be225)}}
+.liveplayer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.demolay{position:relative;z-index:2;text-align:center;padding:20px}
+.demoliveicon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#8a2be2,#ec4899);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.05)}}
-.live-player .demo-title{font-size:16px;color:#fff;font-weight:700;margin-bottom:6px}
-.live-player .demo-sub{font-size:13px;color:#888;margin-bottom:20px}
-.live-player .demo-btn{padding:12px 28px;border-radius:12px;background:linear-gradient(135deg,#8a2be2,#ec4899);color:#fff;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:.3s}
-.live-player .demo-btn:hover{box-shadow:0 8px 30px rgba(138,43,226,.4)}
-.live-player .demo-note{font-size:11px;color:#555;margin-top:12px}
-.live-player .cam-error{background:rgba(255,45,45,.1);border:1px solid rgba(255,45,45,.2);padding:8px 16px;border-radius:8px;font-size:12px;color:#ff2d2d;margin-top:12px;display:inline-block}
-
-/* LIVE OVERLAYS */
-.live-overlays{position:absolute;inset:0;z-index:5;pointer-events:none}
-.lo-top{position:absolute;top:12px;left:12px;display:flex;gap:8px;pointer-events:auto}
-.lo-badge{background:var(--red);color:#fff;padding:4px 10px;border-radius:16px;font-size:11px;font-weight:700}
-.lo-viewers{background:rgba(0,0,0,.6);padding:4px 10px;border-radius:16px;font-size:11px;color:#fff}
-.lo-creator{position:absolute;bottom:12px;left:12px;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.6);padding:8px 14px;border-radius:12px;pointer-events:auto}
-.lo-creator .av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff}
-.lo-creator .nm{color:#fff;font-weight:700;font-size:13px}
-.lo-creator .fol{margin-left:6px;padding:4px 10px;border-radius:8px;background:#8a2be2;color:#fff;font-size:11px;font-weight:700;cursor:pointer;border:none}
-.lo-report{position:absolute;top:12px;right:12px;pointer-events:auto}
-.lo-report button{padding:5px 12px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-size:11px;cursor:pointer;border:1px solid rgba(255,255,255,.15)}
+.demotitle{font-size:16px;color:#fff;font-weight:700;margin-bottom:6px}
+.demosub{font-size:13px;color:#888;margin-bottom:20px}
+.demobtn{padding:12px 28px;border-radius:12px;background:linear-gradient(135deg,#8a2be2,#ec4899);color:#fff;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:.3s}
+.demobtn:hover{box-shadow:0 8px 30px rgba(138,43,226,.4)}
+.demonote{font-size:11px;color:#555;margin-top:12px}
+.camerr{background:rgba(255,45,45,.1);border:1px solid rgba(255,45,45,.2);padding:8px 16px;border-radius:8px;font-size:12px;color:#ff2d2d;margin-top:12px;display:inline-block}
+.liveoverlays{position:absolute;inset:0;z-index:5;pointer-events:none}
+.lotop{position:absolute;top:12px;left:12px;display:flex;gap:8px;pointer-events:auto}
+.locreator{position:absolute;bottom:12px;left:12px;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.6);padding:8px 14px;border-radius:12px;pointer-events:auto}
+.locreator .av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff}
+.locreator .nm{color:#fff;font-weight:700;font-size:13px}
+.locreator .fol{margin-left:6px;padding:4px 10px;border-radius:8px;background:#8a2be2;color:#fff;font-size:11px;font-weight:700;cursor:pointer;border:none}
+ loreport{position:absolute;top:12px;right:12px;pointer-events:auto}
+.loreport button{padding:5px 12px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-size:11px;cursor:pointer;border:1px solid rgba(255,255,255,.15)}
 
 /* CHAT */
-.live-chat{width:340px;background:#111;border-left:1px solid #1a1a24;display:flex;flex-direction:column;flex-shrink:0}
-.ch-header{padding:10px 14px;border-bottom:1px solid #1a1a24;font-weight:700;font-size:13px;color:#fff;display:flex;justify-content:space-between}
-.ch-msgs{flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:6px}
-.ch-msg{display:flex;gap:6px;animation:fadeIn .3s}
-.ch-msg .av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
-.ch-msg .bd{flex:1}
-.ch-msg .au{font-size:11px;font-weight:700;margin-bottom:1px}
-.ch-msg .tx{font-size:12px;color:#aaa;line-height:1.4}
-.ch-msg.sys .tx{color:#ffd600;font-style:italic}
-.ch-msg.gift{background:rgba(138,43,226,.08);border:1px solid rgba(138,43,226,.15);border-radius:8px;padding:6px 10px}
-.ch-msg.gift .tx{color:#ec4899;font-weight:600}
-.ch-input{padding:10px 14px;border-top:1px solid #1a1a24;display:flex;gap:6px}
-.ch-input input{flex:1;padding:9px 12px;background:#1a1a24;border:1px solid #2a2a38;border-radius:8px;color:#fff;font-size:12px}
-.ch-input button{padding:9px 14px;border-radius:8px;background:#8a2be2;color:#fff;font-weight:700;font-size:12px}
+.livechat{width:340px;background:#111;border-left:1px solid #1a1a24;display:flex;flex-direction:column;flex-shrink:0}
+.chheader{padding:10px 14px;border-bottom:1px solid #1a1a24;font-weight:700;font-size:13px;color:#fff;display:flex;justify-content:space-between}
+.chmsgs{flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.chmsg{display:flex;gap:6px}
+.chmsg .av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+.chmsg .bd{flex:1}
+.chmsg .au{font-size:11px;font-weight:700;margin-bottom:1px}
+.chmsg .tx{font-size:12px;color:#aaa;line-height:1.4}
+.chmsg.sys .tx{color:#ffd600;font-style:italic}
+.chmsg.gift{background:rgba(138,43,226,.08);border:1px solid rgba(138,43,226,.15);border-radius:8px;padding:6px 10px}
+.chmsg.gift .tx{color:#ec4899;font-weight:600}
+.chinput{padding:10px 14px;border-top:1px solid #1a1a24;display:flex;gap:6px}
+.chinput input{flex:1;padding:9px 12px;background:#1a1a24;border:1px solid #2a2a38;border-radius:8px;color:#fff;font-size:12px}
+.chinput button{padding:9px 14px;border-radius:8px;background:#8a2be2;color:#fff;font-weight:700;font-size:12px}
 
 /* GIFTS */
-.gifts-panel{border-top:1px solid #1a1a24;padding:10px 14px;background:#111}
-.gifts-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
-.gift-item{flex-shrink:0;text-align:center;cursor:pointer;padding:8px;border-radius:10px;border:2px solid transparent;transition:.2s;min-width:64px}
-.gift-item:hover,.gift-item.sel{border-color:#8a2be2;background:rgba(138,43,226,.08)}
-.gift-item .ge{font-size:24px}.gift-item .gn{font-size:9px;color:#888;margin-top:3px}.gift-item .gp{font-size:11px;font-weight:700;color:#ffd600}
-.gift-send{width:100%;margin-top:8px;padding:10px;border-radius:10px;background:linear-gradient(135deg,#8a2be2,#ec4899);color:#fff;font-weight:700;font-size:13px;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
+.giftspanel{border-top:1px solid #1a1a24;padding:10px 14px;background:#111}
+.giftsscroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.giftitem{flex-shrink:0;text-align:center;cursor:pointer;padding:8px;border-radius:10px;border:2px solid transparent;transition:.2s;min-width:64px}
+.giftitem:hover,.giftitem.sel{border-color:#8a2be2;background:rgba(138,43,226,.08)}
+.giftitem .ge{font-size:24px}.giftitem .gn{font-size:9px;color:#888;margin-top:3px}.giftitem .gp{font-size:11px;font-weight:700;color:#ffd600}
+.giftsend{width:100%;margin-top:8px;padding:10px;border-radius:10px;background:linear-gradient(135deg,#8a2be2,#ec4899);color:#fff;font-weight:700;font-size:13px;border:none;display:flex;align-items:center;justify-content:center;gap:6px}
 
 /* DASHBOARD */
 .dash{padding-top:72px;max-width:1000px;margin:0 auto;padding-left:16px;padding-right:16px}
-.dash h1{font-size:24px;font-weight:900;margin-bottom:20px}.dash h1 .p{color:#a855f7}
-.d-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
-.d-card{background:#14141e;border:1px solid #2a2a38;border-radius:14px;padding:20px;text-align:center}
-.d-card .di{font-size:28px;margin-bottom:6px}.d-card .dn{font-size:24px;font-weight:900;color:#fff}.d-card .dl{font-size:12px;color:#888;margin-top:3px}
-.d-card.purple{border-color:#8a2be2}.d-card.gold{border-color:#ffd600}.d-card.green{border-color:#00e676}.d-card.pink{border-color:#ec4899}
-.d-section{background:#14141e;border:1px solid #2a2a38;border-radius:14px;padding:20px;margin-bottom:20px}
-.d-section h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:14px}
-.d-table{width:100%;border-collapse:collapse}
-.d-table th{text-align:left;padding:8px 10px;font-size:11px;color:#888;border-bottom:1px solid #2a2a38;text-transform:uppercase;letter-spacing:1px}
-.d-table td{padding:8px 10px;font-size:12px;border-bottom:1px solid rgba(42,42,56,.3)}
+.dash h1{font-size:24px;font-weight:900;margin-bottom:20px}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
+.dcard{background:#14141e;border:1px solid #2a2a38;border-radius:14px;padding:20px;text-align:center}
+.dcard .di{font-size:28px;margin-bottom:6px}.dcard .dn{font-size:24px;font-weight:900;color:#fff}.dcard .dl{font-size:12px;color:#888;margin-top:3px}
+.dcard.cpur{border-color:#8a2be2}.dcard.cgld{border-color:#ffd600}.dcard.cgrn{border-color:#00e676}.dcard.cpnk{border-color:#ec4899}
+.dsec{background:#14141e;border:1px solid #2a2a38;border-radius:14px;padding:20px;margin-bottom:20px}
+.dsec h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:14px}
+.dtable{width:100%;border-collapse:collapse}
+.dtable th{text-align:left;padding:8px 10px;font-size:11px;color:#888;border-bottom:1px solid #2a2a38;text-transform:uppercase;letter-spacing:1px}
+.dtable td{padding:8px 10px;font-size:12px;border-bottom:1px solid rgba(42,42,56,.3)}
 
 /* WALLET */
-.wal-bal{text-align:center;padding:32px;background:linear-gradient(135deg,rgba(138,43,226,.08),rgba(236,72,153,.04));border-radius:18px;border:1px solid #2a2a38;margin-bottom:20px}
-.wal-bal .wl{font-size:13px;color:#888}.wal-bal .wa{font-size:42px;font-weight:900;color:#ffd600;margin:6px 0}.wal-bal .wc{font-size:12px;color:#888}
-.wal-btns{display:flex;gap:10px;justify-content:center;margin-top:16px}
-.coin-pack{background:#14141e;border:1px solid #2a2a38;border-radius:14px;padding:20px;text-align:center;cursor:pointer;transition:.3s}
-.coin-pack:hover{border-color:#8a2be2;transform:translateY(-2px)}
-.coin-pack .cpn{font-size:22px;font-weight:900;color:#ffd600}.coin-pack .cpp{font-size:14px;color:#fff;margin:4px 0}.coin-pack .cpb{font-size:10px;color:#00e676}
+.walbal{text-align:center;padding:32px;background:linear-gradient(135deg,rgba(138,43,226,.08),rgba(236,72,153,.04));border-radius:18px;border:1px solid #2a2a38;margin-bottom:20px}
+.walbal .wl{font-size:13px;color:#888}.walbal .wa{font-size:42px;font-weight:900;color:#ffd600;margin:6px 0}.walbal .wc{font-size:12px;color:#888}
+.walbtns{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.coinpack{background:#14141e;border:1px solid #2a2a38;border-radius:14px;padding:20px;text-align:center;cursor:pointer;transition:.3s}
+.coinpack:hover{border-color:#8a2be2;transform:translateY(-2px)}
+.coinpack .cpn{font-size:22px;font-weight:900;color:#ffd600}.coinpack .cpp{font-size:14px;color:#fff;margin:4px 0}.coinpack .cpb{font-size:10px;color:#00e676}
 
 /* RANKING */
-.rank-item{display:flex;align-items:center;gap:10px;padding:12px;background:#14141e;border:1px solid #2a2a38;border-radius:10px;margin-bottom:8px;transition:.3s}
-.rank-item:hover{border-color:#8a2be2}
-.rk-pos{font-size:18px;font-weight:900;width:32px;text-align:center}
-.rk-pos.r1{color:#ffd600}.rk-pos.r2{color:#c0c0c0}.rk-pos.r3{color:#cd7f32}
-.rk-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:14px}
-.rk-info{flex:1}.rk-name{font-weight:700;color:#fff;font-size:13px}.rk-sub{font-size:11px;color:#888}
-.rk-amt{font-size:16px;font-weight:900;color:#ffd600}
+.rankitem{display:flex;align-items:center;gap:10px;padding:12px;background:#14141e;border:1px solid #2a2a38;border-radius:10px;margin-bottom:8px;transition:.3s}
+.rankitem:hover{border-color:#8a2be2}
+.rkpos{font-size:18px;font-weight:900;width:32px;text-align:center}
+.rkpos.r1{color:#ffd600}.rkpos.r2{color:#c0c0c0}.rkpos.r3{color:#cd7f32}
+.rkav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:14px}
+.rkinfo{flex:1}.rkname{font-weight:700;color:#fff;font-size:13px}.rksub{font-size:11px;color:#888}
+.rkamt{font-size:16px;font-weight:900;color:#ffd600}
 
-/* ANIMATIONS */
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes giftFloat{0%{opacity:1;transform:translateY(0) scale(1)}50%{opacity:1;transform:translateY(-50px) scale(1.3)}100%{opacity:0;transform:translateY(-100px) scale(.7)}}
-.gift-anim{position:fixed;font-size:44px;animation:giftFloat 1.4s forwards;pointer-events:none;z-index:300}
+.giftanim{position:fixed;font-size:44px;animation:giftFloat 1.4s forwards;pointer-events:none;z-index:300}
 
-/* FOOTER */
 footer{background:#111;border-top:1px solid #1a1a24;padding:30px 16px;text-align:center}
 footer p{color:#555;font-size:11px;line-height:1.6}
 footer .fl{display:flex;gap:16px;justify-content:center;margin-top:10px}
 footer .fl a{color:#555;font-size:11px}
 
-/* RESPONSIVE */
 @media(max-width:768px){
-  .live-main{flex-direction:column}
-  .live-chat{width:100%;max-height:45vh;border-left:none;border-top:1px solid #1a1a24}
-  .live-player{min-height:50vh}
-  .nav-link.hide-m{display:none}
-  .d-grid{grid-template-columns:1fr 1fr}
-  .hero-c h1{font-size:28px}
-  .hero-c p{font-size:15px}
+  .livemain{flex-direction:column}
+  .livechat{width:100%;max-height:45vh;border-left:none;border-top:1px solid #1a1a24}
+  .liveplayer{min-height:50vh}
+  .dgrid{grid-template-columns:1fr 1fr}
+  .heroc h1{font-size:28px}
 }
 </style>
 </head>
 <body>
-<div id="root">
-  <!-- SKELETON LOADING -->
-  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:40px">
-    <div class="skeleton" style="width:200px;height:24px"></div>
-    <div class="skeleton" style="width:300px;height:16px"></div>
-    <div class="skeleton" style="width:100px;height:40px;border-radius:12px"></div>
-    <p style="color:#555;font-size:12px;margin-top:8px">Carregando HYPE LIVE...</p>
-  </div>
-</div>
+<div id="app"></div>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel">
-const{useState,useEffect,useRef,useCallback,createContext,useContext}=React;
+<script>
+/* HYPE LIVE 18+ - SEM BABEL - PURO JS */
+var _s=React.useState,_ef=React.useEffect,_ur=React.useRef,_cc=React.createContext,_uc=React.useContext;
+var h=React.createElement;
 
-/* ============================================================
-   HYPE LIVE 18+ - PLATAFORMA COMPLETA (FIX MOBILE)
-   SEM getUserMedia automático. Modo demo por padrão.
-   ============================================================ */
-
-const G=[
+var GIFTS=[
   {id:'rosa',emoji:'🌹',name:'Rosa',price:2,coins:10},
   {id:'coracao',emoji:'❤️',name:'Coração',price:5,coins:25},
   {id:'foguete',emoji:'🚀',name:'Foguete',price:20,coins:100},
@@ -228,549 +199,451 @@ const G=[
   {id:'coroa',emoji:'👑',name:'Coroa',price:100,coins:500}
 ];
 
-const USERS=[
+var USERS=[
   {id:1,user:'ana_live',name:'Ana Carolina',email:'ana@test.com',pw:'1234',age:22,bio:'Live todo dia! 💜',av:'#8a2be2',coins:5000,totalEarn:12500,followers:1520,isCreator:true,banned:false,balance:8750},
-  {id:2,user:'pedro_gamer',name:'Pedro HS',email:'pedro@test.com',pw:'1234',age:25,bio:'Gamer streamer',av:'#ec4899',coins:200,totalEarn:3200,followers:890,isCreator:true,banned:false,balance:2240},
-  {id:3,user:'maria_art',name:'Maria Arte',email:'maria@test.com',pw:'1234',age:28,bio:'Arte e lifestyle',av:'#00e676',coins:1200,totalEarn:6800,followers:2100,isCreator:true,banned:false,balance:4760},
-  {id:4,user:'julia_fit',name:'Julia Fitness',email:'julia@test.com',pw:'1234',age:24,bio:'Treino diário',av:'#ffd600',coins:800,totalEarn:4500,followers:1800,isCreator:true,banned:false,balance:3150},
-  {id:5,user:'client1',name:'Admin Teste',email:'cli@test.com',pw:'1234',age:21,bio:'',av:'#00e5ff',coins:1000,totalEarn:0,followers:0,isCreator:false,banned:false,balance:0}
+  {id:2,user:'pedro_gamer',name:'Pedro HS',email:'pedro@test.com',pw:'1234',age:25,bio:'Gamer',av:'#ec4899',coins:200,totalEarn:3200,followers:890,isCreator:true,banned:false,balance:2240},
+  {id:3,user:'maria_art',name:'Maria Arte',email:'maria@test.com',pw:'1234',age:28,bio:'Arte',av:'#00e676',coins:1200,totalEarn:6800,followers:2100,isCreator:true,banned:false,balance:4760},
+  {id:4,user:'julia_fit',name:'Julia Fitness',email:'julia@test.com',pw:'1234',age:24,bio:'Fitness',av:'#ffd600',coins:800,totalEarn:4500,followers:1800,isCreator:true,banned:false,balance:3150},
+  {id:5,user:'client1',name:'Admin',email:'cli@test.com',pw:'1234',age:21,bio:'',av:'#00e5ff',coins:1000,totalEarn:0,followers:0,isCreator:false,banned:false,balance:0}
 ];
 
-const LIVES=[
-  {id:1,cid:1,cat:'Conversa',title:'Bate-papo noturno 💜',viewers:342,started:Date.now()-3600000,status:'live'},
-  {id:2,cid:2,cat:'Games',title:'RANKED VALORANT 🔥',viewers:128,started:Date.now()-1800000,status:'live'},
-  {id:3,cid:3,cat:'Arte',title:'Desenhando ao vivo 🎨',viewers:89,started:Date.now()-600000,status:'live'}
+var LIVES=[
+  {id:1,cid:1,cat:'Conversa',title:'Bate-papo noturno 💜',viewers:342,started:Date.now()-3600000},
+  {id:2,cid:2,cat:'Games',title:'RANKED VALORANT 🔥',viewers:128,started:Date.now()-1800000},
+  {id:3,cid:3,cat:'Arte',title:'Desenhando ao vivo 🎨',viewers:89,started:Date.now()-600000}
 ];
 
-const TX=[];
+var TX=[];
 
-const Ctx=createContext({page:'landing',nav:()=>{},user:null});
+function AgeGate(p){
+  return h('div',{className:'agegate'},h('div',{className:'agebox'},
+    h('div',{className:'icon'},'🔞'),
+    h('h1',null,h('span',{style:{color:'#a855f7'}},'HYPE'),' ',h('span',{style:{color:'#ec4899'}},'LIVE'),' ',h('span',{style:{color:'#ff2d2d',fontSize:'14px',verticalAlign:'super'}},'18+')),
+    h('div',{className:'warn'},'Este site contém conteúdo para ',h('strong',null,'maiores de 18 anos'),'.'),
+    h('div',{className:'warn'},'Confirme que tem ',h('strong',null,'18 anos ou mais'),'.'),
+    h('div',{className:'agebtns'},
+      h('button',{className:'ageyes',onClick:p.ok},'✅ Tenho 18+'),
+      h('button',{className:'ageno',onClick:function(){window.location.href='https://google.com'}},'❌ Sou menor')
+    ),
+    h('div',{className:'agerules'},'Ao acessar, concorda com os Termos de Uso e Política de Privacidade. Conteúdo com menores é proibido.')
+  ));
+}
 
-/* ========== APP ========== */
-function App(){
-  const[page,setPage]=useState('landing');
-  const[age,setAge]=useState(localStorage.getItem('hl18')==='1');
-  const[user,setUser]=useState(null);
-  const[lid,setLid]=useState(null);
-
-  const nav=(p,id)=>{setPage(p);if(id!==undefined)setLid(id);window.scrollTo(0,0);};
-  const login=(u)=>{setUser(u);nav('home');};
-  const logout=()=>{setUser(null);nav('landing');};
-
-  return(
-    <Ctx.Provider value={{page,nav,user}}>
-      {!age&&<AgeGate ok={()=>{setAge(true);localStorage.setItem('hl18','1');}}/>}
-      <div style={{display:age?'block':'none'}}>
-        <Nav user={user} onLogout={logout} page={page} nav={nav}/>
-        {page==='landing'&&<Landing nav={nav}/>}
-        {page==='auth'&&<Auth onLogin={login}/>}
-        {page==='home'&&<Home nav={nav}/>}
-        {page==='live'&&<Live lid={lid} user={user}/>}
-        {page==='dashboard'&&<Dash user={user} nav={nav}/>}
-        {page==='wallet'&&<Wallet user={user} nav={nav}/>}
-        {page==='ranking'&&<Rank/>}
-        {page==='admin'&&<Admin/>}
-        <footer>
-          <p>© 2025 HYPE LIVE · Plataforma 18+ · Moderação 24h</p>
-          <p>Conteúdo com menores é proibido. Denúncias investigadas em até 24h.</p>
-          <div className="fl"><a href="#">Termos</a><a href="#">Privacidade</a><a href="#">LGPD</a><a href="#">Contato</a></div>
-        </footer>
-      </div>
-    </Ctx.Provider>
+function Nav(p){
+  return h('nav',{className:'nav'},
+    h('div',{className:'navlogo',onClick:function(){p.nav(p.user?'home':'landing')}},'HYPE',h('b',null,'LIVE')),
+    h('div',{className:'navright'},
+      p.user ? h(React.Fragment,null,
+        h('span',{className:'navlink'+(p.page==='home'?' on':''),onClick:function(){p.nav('home')}},'🏠'),
+        h('span',{className:'navlink'+(p.page==='dashboard'?' on':''),onClick:function(){p.nav('dashboard')}},'📊'),
+        h('span',{className:'navlink'+(p.page==='ranking'?' on':''),onClick:function(){p.nav('ranking')}},'🏆'),
+        h('span',{className:'navlink'+(p.page==='wallet'?' on':''),onClick:function(){p.nav('wallet')}},'💰'),
+        p.user.user==='client1' ? h('span',{className:'navlink'+(p.page==='admin'?' on':''),onClick:function(){p.nav('admin')}},'⚙️') : null,
+        h('div',{className:'navav',style:{background:p.user.av}},p.user.name[0]),
+        h('button',{className:'btn btnsm btno',onClick:p.onLogout},'Sair')
+      ) : h('button',{className:'btn btnsm btnp',onClick:function(){p.nav('auth')}},'Entrar')
+    )
   );
 }
 
-/* ========== AGE GATE ========== */
-function AgeGate({ok}){
-  return(
-    <div className="agegate">
-      <div className="age-box">
-        <div className="icon">🔞</div>
-        <h1><span style={{color:'#a855f7'}}>HYPE</span> <span style={{color:'#ec4899'}}>LIVE</span> <span style={{color:'#ff2d2d',fontSize:'14px',verticalAlign:'super'}}>18+</span></h1>
-        <div className="warn">Este site contém conteúdo para <strong>maiores de 18 anos</strong>.</div>
-        <div className="warn">Confirme que tem <strong>18 anos ou mais</strong> para continuar.</div>
-        <div className="age-btns">
-          <button className="age-yes" onClick={ok}>✅ Tenho 18+</button>
-          <button className="age-no" onClick={()=>window.location.href='https://google.com'}>❌ Sou menor</button>
-        </div>
-        <div className="age-rules">Ao acessar, você concorda com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>. Conteúdo com menores é proibido.</div>
-      </div>
-    </div>
+function Landing(p){
+  return h('div',{className:'page'},
+    h('section',{className:'hero'},h('div',{className:'heroc'},
+      h('div',{className:'hero18'},'🔞 Conteúdo 18+ · Verificação obrigatória'),
+      h('h1',null,h('span',{style:{color:'#a855f7'}},'Conecte. '),' ',h('span',{style:{color:'#ec4899'}},'Interaja. '),' ',h('span',{style:{color:'#ffd600'}},'Ganhe.')),
+      h('p',null,'Plataforma de live streaming onde criadores ganham dinheiro com presentes reais.'),
+      h('div',{className:'herobtns'},
+        h('button',{className:'btn btnp',onClick:function(){p.nav('auth')}},'🚀 Começar Agora'),
+        h('button',{className:'btn btno',onClick:function(){p.nav('home')}},'▶️ Ver Lives')
+      )
+    )),
+    h('section',{className:'feat'},h('h2',null,'Como ',h('span',{style:{color:'#a855f7'}},'funciona')),
+      h('div',{className:'fgrid'},
+        h('div',{className:'fcard'},h('div',{className:'fi'},'🎬'),h('h3',null,'Inicie sua Live'),h('p',null,'Comece a transmitir com um clique.')),
+        h('div',{className:'fcard'},h('div',{className:'fi'},'🎁'),h('h3',null,'Presentes Reais'),h('p',null,'Fãs enviam presentes com valor real em reais.')),
+        h('div',{className:'fcard'},h('div',{className:'fi'},'💰'),h('h3',null,'Ganhe Dinheiro'),h('p',null,'Receba 70% do valor. Saque via PIX.')),
+        h('div',{className:'fcard'},h('div',{className:'fi'},'🛡️'),h('h3',null,'Seguro'),h('p',null,'Moderação 24h, verificação 18+.')),
+        h('div',{className:'fcard'},h('div',{className:'fi'},'🏆'),h('h3',null,'Ranking'),h('p',null,'Compete e suba no ranking semanal.')),
+        h('div',{className:'fcard'},h('div',{className:'fi'},'📱'),h('h3',null,'Mobile First'),h('p',null,'Otimizado para celular.'))
+      )
+    ),
+    h('section',{className:'feat'},h('h2',null,'Presentes ',h('span',{style:{color:'#a855f7'}},'e valores')),
+      h('p',{style:{color:'#888',marginBottom:28,textAlign:'center',fontSize:14}},'Envie presentes e apoie criadores'),
+      h('div',{style:{display:'flex',gap:14,justifyContent:'center',flexWrap:'wrap'}},
+        GIFTS.map(function(g){return h('div',{key:g.id,style:{background:'#14141e',border:'1px solid #2a2a38',borderRadius:14,padding:20,textAlign:'center',minWidth:110}},
+          h('div',{style:{fontSize:36}},g.emoji),
+          h('div',{style:{fontWeight:700,marginTop:6,color:'#fff',fontSize:14}},g.name),
+          h('div',{style:{color:'#ffd600',fontWeight:900,fontSize:18,marginTop:4}},'R$ ',g.price),
+          h('div',{style:{color:'#888',fontSize:10}},g.coins,' moedas')
+        )})
+      )
+    )
   );
 }
 
-/* ========== NAV ========== */
-function Nav({user,onLogout,page,nav}){
-  return(
-    <nav className="nav">
-      <div className="nav-logo" onClick={()=>nav(user?'home':'landing')}>HYPE<span>LIVE</span></div>
-      <div className="nav-right">
-        {user?(
-          <>
-            <span className={`nav-link ${page==='home'?'on':''}`} onClick={()=>nav('home')}>🏠</span>
-            <span className={`nav-link ${page==='dashboard'?'on':''} hide-m`} onClick={()=>nav('dashboard')}>📊</span>
-            <span className={`nav-link ${page==='ranking'?'on':''} hide-m`} onClick={()=>nav('ranking')}>🏆</span>
-            <span className={`nav-link ${page==='wallet'?'on':''}`} onClick={()=>nav('wallet')}>💰</span>
-            {user.user==='client1'&&<span className={`nav-link ${page==='admin'?'on':''} hide-m`} onClick={()=>nav('admin')}>⚙️</span>}
-            <div className="nav-av" style={{background:user.av}}>{user.name[0]}</div>
-            <button className="btn btn-sm btn-o" onClick={onLogout}>Sair</button>
-          </>
-        ):(
-          <button className="btn btn-sm btn-p" onClick={()=>nav('auth')}>Entrar</button>
-        )}
-      </div>
-    </nav>
-  );
-}
-
-/* ========== LANDING ========== */
-function Landing({nav}){
-  return(
-    <div className="page">
-      <section className="hero">
-        <div className="hero-c">
-          <div className="hero-18">🔞 Conteúdo 18+ · Verificação obrigatória</div>
-          <h1><span className="p">Conecte.</span> <span className="pk">Interaja.</span> <span className="g">Ganhe.</span></h1>
-          <p>Plataforma de live streaming onde criadores ganham dinheiro com presentes reais. Comece agora.</p>
-          <div className="hero-btns">
-            <button className="btn btn-p" onClick={()=>nav('auth')}>🚀 Começar Agora</button>
-            <button className="btn btn-o" onClick={()=>nav('home')}>▶️ Ver Lives</button>
-          </div>
-        </div>
-      </section>
-      <section className="features">
-        <h2>Como <span className="p">funciona</span></h2>
-        <div className="f-grid">
-          <div className="f-card"><div className="fi">🎬</div><h3>Inicie sua Live</h3><p>Comece a transmitir com um clique. Escolha sua categoria e conecte com espectadores.</p></div>
-          <div className="f-card"><div className="fi">🎁</div><h3>Presentes Reais</h3><p>Fãs enviam presentes durante a live. Cada presente tem valor real em reais.</p></div>
-          <div className="f-card"><div className="fi">💰</div><h3>Ganhe Dinheiro</h3><p>Receba 70% do valor de cada presente. Saque via PIX a qualquer momento.</p></div>
-          <div className="f-card"><div className="fi">🛡️</div><h3>Seguro</h3><p>Moderação 24h, verificação 18+, denúncias. Ambiente seguro.</p></div>
-          <div className="f-card"><div className="fi">🏆</div><h3>Ranking</h3><p>Compete com outros criadores e suba no ranking semanal.</p></div>
-          <div className="f-card"><div className="fi">📱</div><h3>Mobile First</h3><p>Tudo otimizado para celular. Lives e chat funcionam perfeitamente.</p></div>
-        </div>
-      </section>
-      <section className="features">
-        <h2>Presentes <span className="p">e valores</span></h2>
-        <p style={{color:'#888',marginBottom:28,textAlign:'center',fontSize:14}}>Envie presentes e apoie seus criadores</p>
-        <div style={{display:'flex',gap:14,justifyContent:'center',flexWrap:'wrap'}}>
-          {G.map(g=>(
-            <div key={g.id} style={{background:'#14141e',border:'1px solid #2a2a38',borderRadius:14,padding:20,textAlign:'center',minWidth:110}}>
-              <div style={{fontSize:36}}>{g.emoji}</div>
-              <div style={{fontWeight:700,marginTop:6,color:'#fff',fontSize:14}}>{g.name}</div>
-              <div style={{color:'#ffd600',fontWeight:900,fontSize:18,marginTop:4}}>R$ {g.price}</div>
-              <div style={{color:'#888',fontSize:10}}>{g.coins} moedas</div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-/* ========== AUTH ========== */
-function Auth({onLogin}){
-  const[tab,setTab]=useState('login');
-  const[err,setErr]=useState('');
-  const[f,setF]=useState({user:'',email:'',pw:'',pw2:'',name:'',age:''});
-  const doLogin=()=>{const u=USERS.find(x=>x.email===f.email&&x.pw===f.pw);if(!u){setErr('Email ou senha incorretos');return;}if(u.banned){setErr('Conta banida');return;}onLogin(u);};
-  const doReg=()=>{
+function Auth(p){
+  var st=_s('login');var tab=st[0];var setTab=st[1];
+  var se=_s('');var err=se[0];var setErr=se[1];
+  var sf=_s({user:'',email:'',pw:'',pw2:'',name:'',age:''});var f=sf[0];var setF=sf[1];
+  function doLogin(){
+    var u=USERS.find(function(x){return x.email===f.email&&x.pw===f.pw});
+    if(!u){setErr('Email ou senha incorretos');return;}
+    if(u.banned){setErr('Conta banida');return;}
+    p.onLogin(u);
+  }
+  function doReg(){
     if(!f.user||!f.email||!f.pw||!f.name||!f.age){setErr('Preencha tudo');return;}
     if(parseInt(f.age)<18){setErr('Somente 18+');return;}
     if(f.pw!==f.pw2){setErr('Senhas não conferem');return;}
-    const n={id:USERS.length+1,user:f.user,name:f.name,email:f.email,pw:f.pw,age:parseInt(f.age),bio:'',av:'#8a2be2',coins:100,totalEarn:0,followers:0,isCreator:false,banned:false,balance:0};
-    USERS.push(n);onLogin(n);
-  };
-  return(
-    <div className="auth-p page">
-      <div className="auth-box">
-        <h2>Bem-vindo ao <span className="p">HYPE LIVE</span></h2>
-        <div className="auth-tabs">
-          <div className={`auth-tab ${tab==='login'?'on':''}`} onClick={()=>{setTab('login');setErr('');}}>Entrar</div>
-          <div className={`auth-tab ${tab==='reg'?'on':''}`} onClick={()=>{setTab('reg');setErr('');}}>Cadastrar</div>
-        </div>
-        {err&&<div className="f-err">{err}</div>}
-        {tab==='login'?(
-          <>
-            <div className="fg"><label>Email</label><input value={f.email} onChange={e=>setF({...f,email:e.target.value})} placeholder="seu@email.com"/></div>
-            <div className="fg"><label>Senha</label><input type="password" value={f.pw} onChange={e=>setF({...f,pw:e.target.value})} placeholder="••••"/></div>
-            <button className="btn btn-p" style={{width:'100%',justifyContent:'center',padding:13}} onClick={doLogin}>Entrar</button>
-            <p style={{textAlign:'center',marginTop:10,fontSize:11,color:'#555'}}>Teste: cli@test.com / 1234</p>
-          </>
-        ):(
-          <>
-            <div className="fg"><label>Nome</label><input value={f.name} onChange={e=>setF({...f,name:e.target.value})} placeholder="Seu nome"/></div>
-            <div className="fg"><label>Username</label><input value={f.user} onChange={e=>setF({...f,user:e.target.value})} placeholder="@user"/></div>
-            <div className="fg"><label>Email</label><input value={f.email} onChange={e=>setF({...f,email:e.target.value})} placeholder="email"/></div>
-            <div className="fg"><label>Data nascimento</label><input type="date" value={f.age} onChange={e=>setF({...f,age:e.target.value})}/></div>
-            <div className="fg"><label>Senha</label><input type="password" value={f.pw} onChange={e=>setF({...f,pw:e.target.value})} placeholder="Mín 6"/></div>
-            <div className="fg"><label>Confirmar</label><input type="password" value={f.pw2} onChange={e=>setF({...f,pw2:e.target.value})}/></div>
-            <div style={{fontSize:10,color:'#555',marginBottom:10}}>Ao criar conta, confirma ter 18+ e concorda com os <a href="#" style={{color:'#8a2be2'}}>Termos</a>.</div>
-            <button className="btn btn-p" style={{width:'100%',justifyContent:'center',padding:13}} onClick={doReg}>Criar Conta</button>
-          </>
-        )}
-      </div>
-    </div>
+    var n={id:USERS.length+1,user:f.user,name:f.name,email:f.email,pw:f.pw,age:parseInt(f.age),bio:'',av:'#8a2be2',coins:100,totalEarn:0,followers:0,isCreator:false,banned:false,balance:0};
+    USERS.push(n);p.onLogin(n);
+  }
+  return h('div',{className:'authp page'},h('div',{className:'authbox'},
+    h('h2',null,'Bem-vindo ao ',h('span',{style:{color:'#a855f7'}},'HYPE LIVE')),
+    h('div',{className:'authtabs'},
+      h('div',{className:'authtab'+(tab==='login'?' on':''),onClick:function(){setTab('login');setErr('')}},'Entrar'),
+      h('div',{className:'authtab'+(tab==='reg'?' on':''),onClick:function(){setTab('reg');setErr('')}},'Cadastrar')
+    ),
+    err ? h('div',{className:'ferr'},err) : null,
+    tab==='login' ?
+      h(React.Fragment,null,
+        h('div',{className:'fg'},h('label',null,'Email'),h('input',{value:f.email,onChange:function(e){setF(Object.assign({},f,{email:e.target.value}))},placeholder:'seu@email.com'})),
+        h('div',{className:'fg'},h('label',null,'Senha'),h('input',{type:'password',value:f.pw,onChange:function(e){setF(Object.assign({},f,{pw:e.target.value}))},placeholder:'••••'})),
+        h('button',{className:'btn btnp',style:{width:'100%',justifyContent:'center',padding:13},onClick:doLogin},'Entrar'),
+        h('p',{style:{textAlign:'center',marginTop:10,fontSize:11,color:'#555'}},'Teste: cli@test.com / 1234')
+      )
+    :
+      h(React.Fragment,null,
+        h('div',{className:'fg'},h('label',null,'Nome'),h('input',{value:f.name,onChange:function(e){setF(Object.assign({},f,{name:e.target.value}))},placeholder:'Seu nome'})),
+        h('div',{className:'fg'},h('label',null,'Username'),h('input',{value:f.user,onChange:function(e){setF(Object.assign({},f,{user:e.target.value}))},placeholder:'@user'})),
+        h('div',{className:'fg'},h('label',null,'Email'),h('input',{value:f.email,onChange:function(e){setF(Object.assign({},f,{email:e.target.value}))},placeholder:'email'})),
+        h('div',{className:'fg'},h('label',null,'Nascimento'),h('input',{type:'date',value:f.age,onChange:function(e){setF(Object.assign({},f,{age:e.target.value}))}})),
+        h('div',{className:'fg'},h('label',null,'Senha'),h('input',{type:'password',value:f.pw,onChange:function(e){setF(Object.assign({},f,{pw:e.target.value}))},placeholder:'Mín 6'})),
+        h('div',{className:'fg'},h('label',null,'Confirmar'),h('input',{type:'password',value:f.pw2,onChange:function(e){setF(Object.assign({},f,{pw2:e.target.value}))}})),
+        h('div',{style:{fontSize:10,color:'#555',marginBottom:10}},'Ao criar conta, confirma ter 18+.'),
+        h('button',{className:'btn btnp',style:{width:'100%',justifyContent:'center',padding:13},onClick:doReg},'Criar Conta')
+      )
+  ));
+}
+
+function Home(p){
+  return h('div',{className:'page',style:{paddingTop:72}},
+    h('div',{style:{maxWidth:1000,margin:'0 auto',padding:'0 16px'}},
+      h('h2',{style:{fontSize:22,fontWeight:900,marginBottom:20}},'🔥 Lives ',h('span',{style:{color:'#a855f7'}},'ao vivo')),
+      h('div',{style:{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(260px,1fr))',gap:14}},
+        LIVES.map(function(live){
+          var c=USERS.find(function(u){return u.id===live.cid});
+          var el=Math.floor((Date.now()-live.started)/60000);
+          return h('div',{key:live.id,style:{background:'#14141e',border:'1px solid #2a2a38',borderRadius:14,overflow:'hidden',cursor:'pointer',transition:'0.3s'},onClick:function(){p.nav('live',live.id)}},
+            h('div',{style:{height:180,background:'linear-gradient(135deg,'+c.av+'33,#111)',position:'relative',display:'flex',alignItems:'center',justifyContent:'center'}},
+              h('span',{className:'badge bred',style:{position:'absolute',top:8,left:8}},'🔴 AO VIVO'),
+              h('span',{className:'badge bpur',style:{position:'absolute',top:8,right:8}},'👁️ ',live.viewers),
+              h('div',{style:{width:56,height:56,borderRadius:'50%',background:c.av,display:'flex',alignItems:'center',justifyContent:'center',fontSize:24,fontWeight:700,color:'#fff'}},c.name[0])
+            ),
+            h('div',{style:{padding:14}},
+              h('div',{style:{display:'flex',alignItems:'center',gap:6,marginBottom:4}},
+                h('span',{style:{fontWeight:700,color:'#fff',fontSize:14}},c.name),
+                h('span',{className:'badge bpur',style:{fontSize:9}},live.cat)
+              ),
+              h('div',{style:{fontSize:12,color:'#888'}},live.title),
+              h('div',{style:{fontSize:10,color:'#555',marginTop:4}},'⏱️ ',el,'min · ',live.viewers,' assistindo')
+            )
+          );
+        })
+      )
+    )
   );
 }
 
-/* ========== HOME ========== */
-function Home({nav}){
-  return(
-    <div className="page" style={{paddingTop:72}}>
-      <div style={{maxWidth:1000px;margin:'0 auto',padding:'0 16px'}}>
-        <h2 style={{fontSize:22px,fontWeight:900,marginBottom:20}}>🔥 Lives <span style={{color:'#a855f7'}}>ao vivo</span></h2>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(260px,1fr))',gap:14}}>
-          {LIVES.map(live=>{
-            const c=USERS.find(u=>u.id===live.cid);
-            const el=Math.floor((Date.now()-live.started)/60000);
-            return(
-              <div key={live.id} style={{background:'#14141e',border:'1px solid #2a2a38',borderRadius:14,overflow:'hidden',cursor:'pointer',transition:.3}} onClick={()=>nav('live',live.id)}
-                onMouseEnter={e=>{e.currentTarget.style.borderColor='#8a2be2';e.currentTarget.style.transform='translateY(-2px)';}}
-                onMouseLeave={e=>{e.currentTarget.style.borderColor='#2a2a38';e.currentTarget.style.transform='none';}}>
-                <div style={{height:180,background:`linear-gradient(135deg,${c.av}33,#111)`,position:'relative',display:'flex',alignItems:'center',justify-content:'center'}}>
-                  <span className="badge b-red" style={{position:'absolute',top:8,left:8,animation:'pulse 2s infinite'}}>🔴 AO VIVO</span>
-                  <span className="badge b-purple" style={{position:'absolute',top:8,right:8}}>👁️ {live.viewers}</span>
-                  <div style={{width:56,height:56,borderRadius:'50%',background:c.av,display:'flex',alignItems:'center',justifyContent:'center',fontSize:24,fontWeight:700,color:'#fff'}}>{c.name[0]}</div>
-                </div>
-                <div style={{padding:14}}>
-                  <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4}}>
-                    <span style={{fontWeight:700,color:'#fff',fontSize:14}}>{c.name}</span>
-                    <span className="badge b-purple" style={{fontSize:9}}>{live.cat}</span>
-                  </div>
-                  <div style={{fontSize:12,color:'#888'}}>{live.title}</div>
-                  <div style={{fontSize:10,color:'#555',marginTop:4}}>⏱️ {el}min · {live.viewers} assistindo</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
+function Live(p){
+  var live=LIVES.find(function(l){return l.id===p.lid})||LIVES[0];
+  var creator=USERS.find(function(u){return u.id===live.cid});
+  var vidRef=_ur(null);var chatRef=_ur(null);var streamRef=_ur(null);
+  var si=_s('');var chatIn=si[0];var setChatIn=si[1];
+  var sm=_s([]);var msgs=sm[0];var setMsgs=sm[1];
+  var sg=_s(null);var selGift=sg[0];var setSelGift=sg[1];
+  var sv=_s(live.viewers);var viewers=sv[0];var setViewers=sv[1];
+  var sga=_s(null);var giftAnim=sga[0];var setGiftAnim=sga[1];
+  var sf=_s(false);var following=sf[0];var setFollowing=sf[1];
+  var sc=_s(false);var camOn=sc[0];var setCamOn=sc[1];
+  var sce=_s('');var camErr=sce[0];var setCamErr=sce[1];
 
-/* ========== LIVE PAGE (FIX: NO AUTO CAMERA) ========== */
-function Live({lid,user}){
-  const live=LIVES.find(l=>l.id===lid)||LIVES[0];
-  const creator=USERS.find(u=>u.id===live.cid);
-  const videoRef=useRef(null);
-  const chatRef=useRef(null);
-  const[chatIn,setChatIn]=useState('');
-  const[msgs,setMsgs]=useState([]);
-  const[selGift,setSelGift]=useState(null);
-  const[viewers,setViewers]=useState(live.viewers);
-  const[giftAnim,setGiftAnim]=useState(null);
-  const[following,setFollowing]=useState(false);
-  const[cameraOn,setCameraOn]=useState(false);
-  const[camError,setCamError]=useState('');
-  const streamRef=useRef(null);
-
-  // Chat simulado
-  useEffect(()=>{
-    const m0=[
+  _ef(function(){
+    setMsgs([
       {u:'fan_ana',t:'Oi amor! 💜',c:'#8a2be2'},
       {u:'viewer_1',t:'Tá linda!',c:'#ec4899'},
       {u:'pedro',t:'Cheguei! 🔥',c:'#00e5ff'},
       {u:'maria',t:'Adoro live',c:'#00e676'},
       {u:'fan_2',t:'Manda beijo!',c:'#ffd600'}
-    ];
-    setMsgs(m0);
-    const names=['fan_1','user_42','bro_99','hype_bot','fan_23','viewer_7','live_fan','watcher_1'];
-    const tpls=['Alguém aí? 🔥','TOP demais','manda beijo! 💜','Cheguei!','Tá demais 😍','Show! 🎉','Quero presente kkk','Adoro essa live'];
-    const cols=['#8a2be2','#ec4899','#00e5ff','#00e676','#ffd600','#ff6b00','#ce93d8'];
-    const iv=setInterval(()=>{
-      setMsgs(p=>[...p.slice(-40),{u:names[Math.floor(Math.random()*names.length)],t:tpls[Math.floor(Math.random()*tpls.length)],c:cols[Math.floor(Math.random()*cols.length)]}]);
-      setViewers(v=>v+Math.floor(Math.random()*3)-1);
+    ]);
+    var names=['fan_1','user_42','bro_99','hype_bot','fan_23'];
+    var tpls=['Alguém aí? 🔥','TOP demais','manda beijo! 💜','Cheguei!','Show! 🎉','Quero presente kkk'];
+    var cols=['#8a2be2','#ec4899','#00e5ff','#00e676','#ffd600'];
+    var iv=setInterval(function(){
+      setMsgs(function(prev){
+        var n={u:names[Math.floor(Math.random()*names.length)],t:tpls[Math.floor(Math.random()*tpls.length)],c:cols[Math.floor(Math.random()*cols.length)]};
+        return prev.slice(-40).concat([n]);
+      });
+      setViewers(function(v){return v+Math.floor(Math.random()*3)-1;});
     },2500+Math.random()*3000);
-    return()=>clearInterval(iv);
+    return function(){clearInterval(iv);};
   },[]);
 
-  useEffect(()=>{if(chatRef.current)chatRef.current.scrollTop=chatRef.current.scrollHeight;},[msgs]);
+  _ef(function(){if(chatRef.current)chatRef.current.scrollTop=chatRef.current.scrollHeight;},[msgs]);
 
-  // ATIVAR CÂMERA SÓ NO CLIQUE - NUNCA AUTOMÁTICO
-  const toggleCamera=async()=>{
-    if(cameraOn){
-      // Desligar
-      if(streamRef.current){streamRef.current.getTracks().forEach(t=>t.stop());streamRef.current=null;}
-      if(videoRef.current)videoRef.current.srcObject=null;
-      setCameraOn(false);setCamError('');
-      return;
+  function toggleCam(){
+    if(camOn){
+      if(streamRef.current){streamRef.current.getTracks().forEach(function(t){t.stop();});streamRef.current=null;}
+      if(vidRef.current)vidRef.current.srcObject=null;
+      setCamOn(false);setCamErr('');return;
     }
-    try{
-      const stream=await navigator.mediaDevices.getUserMedia({video:true,audio:true});
+    navigator.mediaDevices.getUserMedia({video:true,audio:true}).then(function(stream){
       streamRef.current=stream;
-      if(videoRef.current){videoRef.current.srcObject=stream;}
-      setCameraOn(true);setCamError('');
-    }catch(err){
-      console.log('Câmera não disponível:',err.message);
-      setCamError('Câmera não disponível — continuando em modo demonstração');
-      setTimeout(()=>setCamError(''),4000);
-    }
-  };
+      if(vidRef.current)vidRef.current.srcObject=stream;
+      setCamOn(true);setCamErr('');
+    }).catch(function(err){
+      setCamErr('Câmera não disponível — modo demonstração');
+      setTimeout(function(){setCamErr('');},4000);
+    });
+  }
 
-  // Cleanup
-  useEffect(()=>{return()=>{if(streamRef.current)streamRef.current.getTracks().forEach(t=>t.stop());};},[]);
+  _ef(function(){return function(){if(streamRef.current)streamRef.current.getTracks().forEach(function(t){t.stop();});};},[]);
 
-  const sendChat=()=>{
-    if(!chatIn.trim()||!user)return;
-    const banned=['palavrão','lixo','idiota'];
-    if(banned.some(w=>chatIn.toLowerCase().includes(w)))return;
-    setMsgs(p=>[...p.slice(-40),{u:user.user,t:chatIn,c:user.av}]);
+  function sendChat(){
+    if(!chatIn.trim()||!p.user)return;
+    setMsgs(function(prev){return prev.slice(-40).concat([{u:p.user.user,t:chatIn,c:p.user.av}]);});
     setChatIn('');
-  };
+  }
 
-  const sendGift=()=>{
-    if(!selGift||!user)return;
-    const g=G.find(x=>x.id===selGift);
-    if(!g||user.coins<g.coins)return;
-    user.coins-=g.coins;
+  function sendGift(){
+    if(!selGift||!p.user)return;
+    var g=GIFTS.find(function(x){return x.id===selGift;});
+    if(!g||p.user.coins<g.coins)return;
+    p.user.coins-=g.coins;
     creator.coins+=Math.floor(g.coins*0.7);
     creator.balance+=g.price*0.7;
-    TX.push({id:Date.now(),from:user.user,to:creator.user,gift:g.name,amount:g.price,date:new Date().toLocaleString()});
-    setMsgs(p=>[...p.slice(-40),{u:user.user,t:`Enviou ${g.emoji} ${g.name} (R$${g.price})`,c:'#ec4899',isGift:true}]);
-    setGiftAnim(g.emoji);
-    setTimeout(()=>setGiftAnim(null),1400);
+    TX.push({id:Date.now(),from:p.user.user,to:creator.user,gift:g.name,amount:g.price,date:new Date().toLocaleString()});
+    setMsgs(function(prev){return prev.slice(-40).concat([{u:p.user.user,t:'Enviou '+g.emoji+' '+g.name+' (R$'+g.price+')',c:'#ec4899',isGift:true}]);});
+    setGiftAnim(g.emoji);setTimeout(function(){setGiftAnim(null);},1400);
     setSelGift(null);
-  };
+  }
 
-  return(
-    <div className="live-wrap">
-      <div className="live-main">
-        {/* PLAYER - DEMO MODE, SEM AUTO CAMERA */}
-        <div className="live-player">
-          {/* Video element hidden por padrão, só aparece quando cameraOn */}
-          <video ref={videoRef} autoPlay muted playsInline style={{display:cameraOn?'block':'none'}}/>
-          {/* Demo overlay - SEMPRE visível quando camera off */}
-          {!cameraOn&&(
-            <div className="demo-overlay">
-              <div className="demo-live-icon">🔴</div>
-              <div className="demo-title">Modo Demonstração</div>
-              <div className="demo-sub">A live está funcionando em modo demo</div>
-              <button className="demo-btn" onClick={toggleCamera}>📹 Ativar Câmera</button>
-              <div className="demo-note">Chat, presentes e todas as funcionalidades funcionam sem câmera</div>
-            </div>
-          )}
-          {cameraOn&&(
-            <button onClick={toggleCamera} style={{position:'absolute',bottom:60,left:'50%',transform:'translateX(-50%)',zIndex:10,padding:'8px 16px',borderRadius:8,background:'rgba(0,0,0,.6)',color:'#fff',fontSize:12,border:'1px solid rgba(255,255,255,.2)',cursor:'pointer'}}>
-              📹 Desligar Câmera
-            </button>
-          )}
-          {camError&&<div style={{position:'absolute',bottom:10,left:'50%',transform:'translateX(-50%)',zIndex:10}}><div className="cam-error">{camError}</div></div>}
-          {/* Overlays */}
-          <div className="live-overlays">
-            <div className="lo-top">
-              <span className="lo-badge" style={{background:'#ff2d2d',animation:'pulse 2s infinite'}}>🔴 AO VIVO</span>
-              <span className="lo-viewers">👁️ {viewers}</span>
-              <span className="badge b-purple">{live.cat}</span>
-            </div>
-            <div className="lo-creator">
-              <div className="av" style={{background:creator.av}}>{creator.name[0]}</div>
-              <div>
-                <div className="nm">{creator.name}</div>
-                <div style={{fontSize:10,color:'#888'}}>👤 {creator.followers} seguidores</div>
-              </div>
-              {user&&user.id!==creator.id&&(
-                <button className="fol" onClick={()=>setFollowing(!following)} style={{background:following?'#1a1a24':'#8a2be2',border:following?'1px solid #2a2a38':'none'}}>
-                  {following?'✓ Seguindo':'Seguir'}
-                </button>
-              )}
-            </div>
-            <div className="lo-report">
-              <button onClick={()=>{TX.push({id:Date.now(),from:user?.user||'anon',to:'admin',gift:'DENÚNCIA',amount:0,date:new Date().toLocaleString()});alert('✅ Denúncia enviada!');}}>⚠️ Denunciar</button>
-            </div>
-          </div>
-          {giftAnim&&<div className="gift-anim" style={{left:'50%',top:'40%'}}>{giftAnim}</div>}
-        </div>
+  var selGObj=GIFTS.find(function(x){return x.id===selGift;});
 
-        {/* CHAT */}
-        <div className="live-chat">
-          <div className="ch-header"><span>💬 Chat ao vivo</span><span style={{fontSize:11,color:'#888'}}>{viewers} online</span></div>
-          <div className="ch-msgs" ref={chatRef}>
-            <div className="ch-msg sys"><div className="bd"><div className="tx">📺 {creator.name} iniciou: {live.title}</div></div></div>
-            {msgs.map((m,i)=>(
-              <div key={i} className={`ch-msg ${m.isGift?'gift':''}`}>
-                <div className="av" style={{background:m.c}}>{m.u[0].toUpperCase()}</div>
-                <div className="bd">
-                  <div className="au" style={{color:m.c}}>{m.u}</div>
-                  <div className="tx">{m.isGift?'🎁 ':''}{m.t}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* GIFTS */}
-          {user&&(
-            <div className="gifts-panel">
-              <div className="gifts-scroll">
-                {G.map(g=>(
-                  <div key={g.id} className={`gift-item ${selGift===g.id?'sel':''}`} onClick={()=>setSelGift(g.id)}>
-                    <div className="ge">{g.emoji}</div><div className="gn">{g.name}</div><div className="gp">R$ {g.price}</div>
-                  </div>
-                ))}
-              </div>
-              {selGift&&(
-                <button className="gift-send" onClick={sendGift}>🎁 Enviar {G.find(x=>x.id===selGift)?.name} · R$ {G.find(x=>x.id===selGift)?.price}</button>
-              )}
-            </div>
-          )}
-          <div className="ch-input">
-            <input value={chatIn} onChange={e=>setChatIn(e.target.value)} onKeyDown={e=>e.key==='Enter'&&sendChat()} placeholder={user?'Mensagem...':'Login para chat'}/>
-            <button onClick={sendChat}>Enviar</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  return h('div',{className:'livewrap'},h('div',{className:'livemain'},
+    h('div',{className:'liveplayer'},
+      h('video',{ref:vidRef,autoPlay:true,muted:true,playsInline:true,style:{display:camOn?'block':'none'}}),
+      !camOn ? h('div',{className:'demolay'},
+        h('div',{className:'demoliveicon'},'🔴'),
+        h('div',{className:'demotitle'},'Modo Demonstração'),
+        h('div',{className:'demosub'},'Live funcionando em modo demo'),
+        h('button',{className:'demobtn',onClick:toggleCam},'📹 Ativar Câmera'),
+        h('div',{className:'demonote'},'Chat, presentes e tudo funciona sem câmera')
+      ) : h('button',{onClick:toggleCam,style:{position:'absolute',bottom:60,left:'50%',transform:'translateX(-50%)',zIndex:10,padding:'8px 16px',borderRadius:8,background:'rgba(0,0,0,.6)',color:'#fff',fontSize:12,border:'1px solid rgba(255,255,255,.2)',cursor:'pointer'}},'📹 Desligar Câmera'),
+      camErr ? h('div',{style:{position:'absolute',bottom:10,left:'50%',transform:'translateX(-50%)',zIndex:10}},h('div',{className:'camerr'},camErr)) : null,
+      h('div',{className:'liveoverlays'},
+        h('div',{className:'lotop'},
+          h('span',{className:'badge bred',style:{animation:'pulse 2s infinite'}},'🔴 AO VIVO'),
+          h('span',{className:'badge',style:{background:'rgba(0,0,0,.6)',padding:'4px 10px',borderRadius:16,fontSize:11,color:'#fff'}},'👁️ ',viewers),
+          h('span',{className:'badge bpur'},live.cat)
+        ),
+        h('div',{className:'locreator'},
+          h('div',{className:'av',style:{background:creator.av}},creator.name[0]),
+          h('div',null,h('div',{className:'nm'},creator.name),h('div',{style:{fontSize:10,color:'#888'}},'👤 ',creator.followers,' seguidores')),
+          p.user&&p.user.id!==creator.id ? h('button',{className:'fol',onClick:function(){setFollowing(!following)},style:{background:following?'#1a1a24':'#8a2be2',border:following?'1px solid #2a2a38':'none'}},following?'✓ Seguindo':'Seguir') : null
+        ),
+        h('div',{className:'loreport'},h('button',{onClick:function(){alert('✅ Denúncia enviada!')}},'⚠️ Denunciar'))
+      ),
+      giftAnim ? h('div',{className:'giftanim',style:{left:'50%',top:'40%'}},giftAnim) : null
+    ),
+    h('div',{className:'livechat'},
+      h('div',{className:'chheader'},h('span',null,'💬 Chat ao vivo'),h('span',{style:{fontSize:11,color:'#888'}},viewers,' online')),
+      h('div',{className:'chmsgs',ref:chatRef},
+        h('div',{className:'chmsg sys'},h('div',{className:'bd'},h('div',{className:'tx'},'📺 ',creator.name,' iniciou: ',live.title))),
+        msgs.map(function(m,i){
+          return h('div',{key:i,className:'chmsg'+(m.isGift?' gift':'')},
+            h('div',{className:'av',style:{background:m.c}},m.u[0].toUpperCase()),
+            h('div',{className:'bd'},
+              h('div',{className:'au',style:{color:m.c}},m.u),
+              h('div',{className:'tx'},m.isGift?'🎁 ':'',m.t)
+            )
+          );
+        })
+      ),
+      p.user ? h('div',{className:'giftspanel'},
+        h('div',{className:'giftsscroll'},
+          GIFTS.map(function(g){
+            return h('div',{key:g.id,className:'giftitem'+(selGift===g.id?' sel':''),onClick:function(){setSelGift(g.id)}},
+              h('div',{className:'ge'},g.emoji),h('div',{className:'gn'},g.name),h('div',{className:'gp'},'R$ ',g.price)
+            );
+          })
+        ),
+        selGift&&selGObj ? h('button',{className:'giftsend',onClick:sendGift},'🎁 Enviar ',selGObj.name,' · R$ ',selGObj.price) : null
+      ) : null,
+      h('div',{className:'chinput'},
+        h('input',{value:chatIn,onChange:function(e){setChatIn(e.target.value)},onKeyDown:function(e){if(e.key==='Enter')sendChat();},placeholder:p.user?'Mensagem...':'Login para chat'}),
+        h('button',{onClick:sendChat},'Enviar')
+      )
+    )
+  ));
+}
+
+function Dash(p){
+  if(!p.user){p.nav('auth');return null;}
+  var myTx=TX.filter(function(t){return t.to===p.user.user;});
+  return h('div',{className:'dash page'},
+    h('h1',null,'📊 ',h('span',{style:{color:'#a855f7'}},'Dashboard')),
+    h('div',{className:'dgrid'},
+      h('div',{className:'dcard cpur'},h('div',{className:'di'},'💰'),h('div',{className:'dn'},'R$ ',p.user.balance.toLocaleString()),h('div',{className:'dl'},'Saldo')),
+      h('div',{className:'dcard cgld'},h('div',{className:'di'},'🎁'),h('div',{className:'dn'},'R$ ',p.user.totalEarn.toLocaleString()),h('div',{className:'dl'},'Total Ganho')),
+      h('div',{className:'dcard cgrn'},h('div',{className:'di'},'👤'),h('div',{className:'dn'},p.user.followers.toLocaleString()),h('div',{className:'dl'},'Seguidores')),
+      h('div',{className:'dcard cpnk'},h('div',{className:'di'},'🪙'),h('div',{className:'dn'},p.user.coins.toLocaleString()),h('div',{className:'dl'},'Moedas'))
+    ),
+    h('div',{style:{display:'flex',gap:10,marginBottom:20}},
+      h('button',{className:'btn btnp',onClick:function(){p.nav('wallet')}},'💰 Sacar via PIX'),
+      h('button',{className:'btn btno',onClick:function(){p.nav('ranking')}},'🏆 Ranking')
+    ),
+    h('div',{className:'dsec'},
+      h('h3',null,'📋 Histórico de Ganhos'),
+      myTx.length===0 ? h('p',{style:{color:'#888',fontSize:13}},'Nenhuma transação ainda.') :
+      h('table',{className:'dtable'},
+        h('thead',null,h('tr',null,h('th',null,'Data'),h('th',null,'De'),h('th',null,'Presente'),h('th',null,'Valor'))),
+        h('tbody',null,myTx.map(function(t){
+          return h('tr',{key:t.id},h('td',{style:{color:'#888'}},t.date),h('td',{style:{color:'#a855f7',fontWeight:600}},t.from),h('td',null,'🎁 ',t.gift),h('td',{style:{color:'#00e676',fontWeight:700}},'+R$ ',t.amount));
+        }))
+      )
+    )
   );
 }
 
-/* ========== DASHBOARD ========== */
-function Dash({user,nav}){
-  if(!user){nav('auth');return null;}
-  const myTx=TX.filter(t=>t.to===user.user);
-  return(
-    <div className="dash page">
-      <h1>📊 <span className="p">Dashboard</span></h1>
-      <div className="d-grid">
-        <div className="d-card purple"><div className="di">💰</div><div className="dn">R$ {user.balance.toLocaleString()}</div><div className="dl">Saldo</div></div>
-        <div className="d-card gold"><div className="di">🎁</div><div className="dn">R$ {user.totalEarn.toLocaleString()}</div><div className="dl">Total Ganho</div></div>
-        <div className="d-card green"><div className="di">👤</div><div className="dn">{user.followers.toLocaleString()}</div><div className="dl">Seguidores</div></div>
-        <div className="d-card pink"><div className="di">🪙</div><div className="dn">{user.coins.toLocaleString()}</div><div className="dl">Moedas</div></div>
-      </div>
-      <div style={{display:'flex',gap:10,marginBottom:20}}>
-        <button className="btn btn-p" onClick={()=>nav('wallet')}>💰 Sacar via PIX</button>
-        <button className="btn btn-o" onClick={()=>nav('ranking')}>🏆 Ranking</button>
-      </div>
-      <div className="d-section">
-        <h3>📋 Histórico de Ganhos</h3>
-        {myTx.length===0?<p style={{color:'#888',fontSize:13}}>Nenhuma transação ainda.</p>:(
-          <table className="d-table">
-            <thead><tr><th>Data</th><th>De</th><th>Presente</th><th>Valor</th></tr></thead>
-            <tbody>{myTx.map(t=>(<tr key={t.id}><td style={{color:'#888'}}>{t.date}</td><td style={{color:'#a855f7',fontWeight:600}}>{t.from}</td><td>🎁 {t.gift}</td><td style={{color:'#00e676',fontWeight:700}}>+R$ {t.amount}</td></tr>))}</tbody>
-          </table>
-        )}
-      </div>
-    </div>
+function Wallet(p){
+  var st=_s('buy');var tab=st[0];var setTab=st[1];
+  var sa=_s('');var amt=sa[0];var setAmt=sa[1];
+  if(!p.user){p.nav('auth');return null;}
+  var packs=[{coins:100,price:10,bonus:null},{coins:500,price:45,bonus:'+10%'},{coins:1000,price:80,bonus:'+20%'},{coins:5000,price:350,bonus:'+30%'},{coins:10000,price:650,bonus:'+40%'}];
+  function buy(pk){
+    var b=parseInt((pk.bonus||'0').replace(/[^0-9]/g,''))||0;
+    p.user.coins+=Math.floor(pk.coins*(1+b/100));
+    alert('✅ +'+pk.coins+' moedas creditadas!');
+  }
+  return h('div',{className:'dash page'},
+    h('h1',null,'💰 ',h('span',{style:{color:'#a855f7'}},'Carteira')),
+    h('div',{className:'walbal'},
+      h('div',{className:'wl'},'Saldo Disponível'),
+      h('div',{className:'wa'},'R$ ',p.user.balance.toLocaleString()),
+      h('div',{className:'wc'},'🪙 ',p.user.coins.toLocaleString(),' moedas'),
+      h('div',{className:'walbtns'},
+        h('button',{className:'btn btng',onClick:function(){setTab('buy')}},'🛒 Comprar Moedas'),
+        h('button',{className:'btn btngold',onClick:function(){setTab('withdraw')}},'💸 Sacar PIX')
+      )
+    ),
+    tab==='buy' ? h('div',{className:'dsec'},
+      h('h3',null,'🛒 Comprar Moedas'),
+      h('p',{style:{color:'#888',fontSize:12,marginBottom:14}},'PIX ou Cartão de Crédito'),
+      h('div',{style:{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))',gap:10}},
+        packs.map(function(pk,i){
+          return h('div',{key:i,className:'coinpack',onClick:function(){buy(pk)}},
+            h('div',{style:{fontSize:24}},'🪙'),
+            h('div',{className:'cpn'},pk.coins.toLocaleString()),
+            h('div',{className:'cpp'},'R$ ',pk.price),
+            pk.bonus ? h('div',{className:'cpb'},'🎁 Bônus ',pk.bonus) : null
+          );
+        })
+      )
+    ) : h('div',{className:'dsec'},
+      h('h3',null,'💸 Sacar via PIX'),
+      h('p',{style:{color:'#888',fontSize:12,marginBottom:14}},'Mínimo R$ 50 · Até 24h'),
+      h('div',{className:'fg'},h('label',null,'Chave PIX'),h('input',{value:p.user.email,readOnly:true,style:{opacity:0.7}})),
+      h('div',{className:'fg'},h('label',null,'Valor'),h('input',{type:'number',value:amt,onChange:function(e){setAmt(e.target.value)},placeholder:'R$ 0,00',min:'50'})),
+      h('button',{className:'btn btngold',onClick:function(){if(parseFloat(amt)>=50&&parseFloat(amt)<=p.user.balance){p.user.balance-=parseFloat(amt);alert('✅ Saque de R$ '+amt+' solicitado!');setAmt('');}else{alert('Valor inválido ou saldo insuficiente.');}}},'Solicitar Saque')
+    )
   );
 }
 
-/* ========== WALLET ========== */
-function Wallet({user,nav}){
-  const[tab,setTab]=useState('buy');
-  const[amt,setAmt]=useState('');
-  if(!user){nav('auth');return null;}
-  const packs=[
-    {coins:100,price:10,bonus:null},{coins:500,price:45,bonus:'+10%'},{coins:1000,price:80,bonus:'+20%'},
-    {coins:5000,price:350,bonus:'+30%'},{coins:10000,price:650,bonus:'+40%'}
-  ];
-  const buy=(p)=>{
-    const bonus=parseInt((p.bonus||'0').replace(/[^0-9]/g,''))||0;
-    user.coins+=Math.floor(p.coins*(1+bonus/100));
-    TX.push({id:Date.now(),from:'Sistema',to:user.user,gift:'Compra moedas',amount:p.price,date:new Date().toLocaleString()});
-    alert(`✅ +${p.coins} moedas creditadas!`);
-  };
-  return(
-    <div className="dash page">
-      <h1>💰 <span className="p">Carteira</span></h1>
-      <div className="wal-bal">
-        <div className="wl">Saldo Disponível</div>
-        <div className="wa">R$ {user.balance.toLocaleString()}</div>
-        <div className="wc">🪙 {user.coins.toLocaleString()} moedas</div>
-        <div className="wal-btns">
-          <button className="btn btn-g" onClick={()=>setTab('buy')}>🛒 Comprar Moedas</button>
-          <button className="btn btn-gold" onClick={()=>setTab('withdraw')}>💸 Sacar PIX</button>
-        </div>
-      </div>
-      {tab==='buy'&&(
-        <div className="d-section">
-          <h3>🛒 Comprar Moedas</h3>
-          <p style={{color:'#888',fontSize:12,marginBottom:14}}>PIX ou Cartão de Crédito</p>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))',gap:10}}>
-            {packs.map((p,i)=>(
-              <div key={i} className="coin-pack" onClick={()=>buy(p)}>
-                <div style={{fontSize:24}}>🪙</div>
-                <div className="cpn">{p.coins.toLocaleString()}</div>
-                <div className="cpp">R$ {p.price}</div>
-                {p.bonus&&<div className="cpb">🎁 Bônus {p.bonus}</div>}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      {tab==='withdraw'&&(
-        <div className="d-section">
-          <h3>💸 Sacar via PIX</h3>
-          <p style={{color:'#888',fontSize:12,marginBottom:14}}>Mínimo R$ 50 · Processado em até 24h</p>
-          <div className="fg"><label>Chave PIX</label><input value={user.email} readOnly style={{opacity:.7}}/></div>
-          <div className="fg"><label>Valor</label><input type="number" value={amt} onChange={e=>setAmt(e.target.value)} placeholder="R$ 0,00" min="50"/></div>
-          <button className="btn btn-gold" onClick={()=>{if(parseFloat(amt)>=50&&parseFloat(amt)<=user.balance){user.balance-=parseFloat(amt);alert(`✅ Saque de R$ ${amt} solicitado!`);setAmt('');}else{alert('Valor inválido ou saldo insuficiente.');}}}>Solicitar Saque</button>
-        </div>
-      )}
-    </div>
-  );
-}
-
-/* ========== RANKING ========== */
 function Rank(){
-  const cr=USERS.filter(u=>u.isCreator).sort((a,b)=>b.totalEarn-a.totalEarn);
-  return(
-    <div className="dash page">
-      <h1>🏆 <span className="p">Ranking Semanal</span></h1>
-      <p style={{color:'#888',marginBottom:20,fontSize:13}}>Top criadores por presentes recebidos</p>
-      {cr.map((c,i)=>(
-        <div key={c.id} className="rank-item">
-          <div className={`rk-pos ${i===0?'r1':i===1?'r2':i===2?'r3':''}`}>#{i+1}</div>
-          <div className="rk-av" style={{background:c.av}}>{c.name[0]}</div>
-          <div className="rk-info"><div className="rk-name">{c.name}</div><div className="rk-sub">👤 {c.followers} seguidores</div></div>
-          <div className="rk-amt">R$ {(c.totalEarn*0.7).toLocaleString()}</div>
-        </div>
-      ))}
-    </div>
+  var cr=USERS.filter(function(u){return u.isCreator;}).sort(function(a,b){return b.totalEarn-a.totalEarn;});
+  return h('div',{className:'dash page'},
+    h('h1',null,'🏆 ',h('span',{style:{color:'#a855f7'}},'Ranking Semanal')),
+    h('p',{style:{color:'#888',marginBottom:20,fontSize:13}},'Top criadores por presentes recebidos'),
+    cr.map(function(c,i){
+      return h('div',{key:c.id,className:'rankitem'},
+        h('div',{className:'rkpos'+(i===0?' r1':i===1?' r2':i===2?' r3':'')},'#',i+1),
+        h('div',{className:'rkav',style:{background:c.av}},c.name[0]),
+        h('div',{className:'rkinfo'},h('div',{className:'rkname'},c.name),h('div',{className:'rksub'},'👤 ',c.followers,' seguidores')),
+        h('div',{className:'rkamt'},'R$ ',(c.totalEarn*0.7).toLocaleString())
+      );
+    })
   );
 }
 
-/* ========== ADMIN ========== */
 function Admin(){
-  const[banned,setBanned]=useState([]);
-  const ban=(id)=>{const u=USERS.find(x=>x.id===id);if(u){u.banned=true;setBanned([...banned,id]);}};
-  const reports=TX.filter(t=>t.gift==='DENÚNCIA');
-  return(
-    <div className="dash page">
-      <h1>⚙️ <span className="p">Admin</span></h1>
-      <div className="d-grid">
-        <div className="d-card purple"><div className="di">👥</div><div className="dn">{USERS.length}</div><div className="dl">Usuários</div></div>
-        <div className="d-card pink"><div className="di">🔴</div><div className="dn">{LIVES.length}</div><div className="dl">Lives</div></div>
-        <div className="d-card gold"><div className="di">🪙</div><div className="dn">{USERS.reduce((s,u)=>s+u.coins,0).toLocaleString()}</div><div className="dl">Moedas</div></div>
-        <div className="d-card" style={{borderColor:'#ff2d2d'}}><div className="di">⚠️</div><div className="dn">{reports.length}</div><div className="dl">Denúncias</div></div>
-      </div>
-      <div className="d-section">
-        <h3>👥 Usuários</h3>
-        <table className="d-table">
-          <thead><tr><th>Nome</th><th>Email</th><th>Idade</th><th>Tipo</th><th>Status</th><th>Ações</th></tr></thead>
-          <tbody>{USERS.map(u=>(
-            <tr key={u.id}><td style={{color:'#fff',fontWeight:600}}>{u.name}</td><td style={{color:'#888'}}>{u.email}</td><td>{u.age}</td>
-            <td>{u.isCreator?<span className="badge b-purple">Criador</span>:'Viewer'}</td>
-            <td>{u.banned?<span className="badge b-red">Banido</span>:<span className="badge b-green">Ativo</span>}</td>
-            <td>{!u.banned&&<button className="btn btn-sm btn-r" onClick={()=>ban(u.id)}>Banir</button>}</td></tr>
-          ))}</tbody>
-        </table>
-      </div>
-      <div className="d-section">
-        <h3>🛡️ Moderação</h3>
-        <div style={{padding:10,background:'#1a1a24',borderRadius:8,marginBottom:8,fontSize:12,display:'flex',alignItems:'center',gap:10}}>
-          <span>🚫</span><div><strong style={{color:'#fff'}}>Auto-ban ativo</strong><div style={{color:'#888'}}>Filtro de palavras no chat</div></div>
-        </div>
-        <div style={{padding:10,background:'#1a1a24',borderRadius:8,marginBottom:8,fontSize:12,display:'flex',alignItems:'center',gap:10}}>
-          <span>📝</span><div><strong style={{color:'#fff'}}>Regras</strong><div style={{color:'#888'}}>Conteúdo com menores proibido. Denúncias em 24h.</div></div>
-        </div>
-        <div style={{padding:10,background:'#1a1a24',borderRadius:8,fontSize:12,display:'flex',alignItems:'center',gap:10}}>
-          <span>🔒</span><div><strong style={{color:'#fff'}}>KYC 18+</strong><div style={{color:'#888'}}>Documento + selfie + data nascimento</div></div>
-        </div>
-      </div>
-    </div>
+  var sb=_s([]);var banned=sb[0];var setBanned=sb[1];
+  function ban(id){var u=USERS.find(function(x){return x.id===id;});if(u){u.banned=true;setBanned(banned.concat([id]));}}
+  var reports=TX.filter(function(t){return t.gift==='DENÚNCIA';});
+  return h('div',{className:'dash page'},
+    h('h1',null,'⚙️ ',h('span',{style:{color:'#a855f7'}},'Admin')),
+    h('div',{className:'dgrid'},
+      h('div',{className:'dcard cpur'},h('div',{className:'di'},'👥'),h('div',{className:'dn'},USERS.length),h('div',{className:'dl'},'Usuários')),
+      h('div',{className:'dcard cpnk'},h('div',{className:'di'},'🔴'),h('div',{className:'dn'},LIVES.length),h('div',{className:'dl'},'Lives')),
+      h('div',{className:'dcard cgld'},h('div',{className:'di'},'🪙'),h('div',{className:'dn'},USERS.reduce(function(s,u){return s+u.coins;},0).toLocaleString()),h('div',{className:'dl'},'Moedas')),
+      h('div',{className:'dcard',style:{borderColor:'#ff2d2d'}},h('div',{className:'di'},'⚠️'),h('div',{className:'dn'},reports.length),h('div',{className:'dl'},'Denúncias'))
+    ),
+    h('div',{className:'dsec'},
+      h('h3',null,'👥 Usuários'),
+      h('table',{className:'dtable'},
+        h('thead',null,h('tr',null,h('th',null,'Nome'),h('th',null,'Email'),h('th',null,'Tipo'),h('th',null,'Status'),h('th',null,'Ações'))),
+        h('tbody',null,USERS.map(function(u){
+          return h('tr',{key:u.id},
+            h('td',{style:{color:'#fff',fontWeight:600}},u.name),
+            h('td',{style:{color:'#888'}},u.email),
+            h('td',null,u.isCreator?h('span',{className:'badge bpur'},'Criador'):'Viewer'),
+            h('td',null,u.banned?h('span',{className:'badge bred'},'Banido'):h('span',{className:'badge bgrn'},'Ativo')),
+            h('td',null,!u.banned?h('button',{className:'btn btnsm btnr',onClick:function(){ban(u.id)}},'Banir'):null)
+          );
+        }))
+      )
+    ),
+    h('div',{className:'dsec'},
+      h('h3',null,'🛡️ Moderação'),
+      h('div',{style:{padding:10,background:'#1a1a24',borderRadius:8,marginBottom:8,fontSize:12,display:'flex',gap:10,alignItems:'center'}},h('span',null,'🚫'),h('div',null,h('strong',{style:{color:'#fff'}},'Auto-ban ativo'),h('div',{style:{color:'#888'}},'Filtro palavras no chat'))),
+      h('div',{style:{padding:10,background:'#1a1a24',borderRadius:8,marginBottom:8,fontSize:12,display:'flex',gap:10,alignItems:'center'}},h('span',null,'📝'),h('div',null,h('strong',{style:{color:'#fff'}},'Regras'),h('div',{style:{color:'#888'}},'Conteúdo com menores proibido. Denúncias em 24h.'))),
+      h('div',{style:{padding:10,background:'#1a1a24',borderRadius:8,fontSize:12,display:'flex',gap:10,alignItems:'center'}},h('span',null,'🔒'),h('div',null,h('strong',{style:{color:'#fff'}},'KYC 18+'),h('div',{style:{color:'#888'}},'Doc + selfie + nascimento')))
+    )
   );
 }
 
-/* ========== RENDER ========== */
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+function App(){
+  var sp=_s('landing');var page=sp[0];var setPage=sp[1];
+  var sa=_s(localStorage.getItem('hl18')==='1');var age=sa[0];var setAge=sa[1];
+  var su=_s(null);var user=su[0];var setUser=su[1];
+  var sl=_s(null);var lid=sl[0];var setLid=sl[1];
+
+  function nav(p,id){setPage(p);if(id!==undefined)setLid(id);window.scrollTo(0,0);}
+  function login(u){setUser(u);nav('home');}
+  function logout(){setUser(null);nav('landing');}
+
+  return h(React.Fragment,null,
+    !age ? h(AgeGate,{ok:function(){setAge(true);localStorage.setItem('hl18','1');}}) : null,
+    h('div',{style:{display:age?'block':'none'}},
+      h(Nav,{user:user,onLogout:logout,page:page,nav:nav}),
+      page==='landing' ? h(Landing,{nav:nav}) : null,
+      page==='auth' ? h(Auth,{onLogin:login}) : null,
+      page==='home' ? h(Home,{nav:nav}) : null,
+      page==='live' ? h(Live,{lid:lid,user:user}) : null,
+      page==='dashboard' ? h(Dash,{user:user,nav:nav}) : null,
+      page==='wallet' ? h(Wallet,{user:user,nav:nav}) : null,
+      page==='ranking' ? h(Rank,null) : null,
+      page==='admin' ? h(Admin,null) : null,
+      h('footer',null,
+        h('p',null,'© 2025 HYPE LIVE · Plataforma 18+ · Moderação 24h'),
+        h('p',{style:{marginTop:4}},'Conteúdo com menores é proibido. Denúncias investigadas em até 24h.'),
+        h('div',{className:'fl'},h('a',{href:'#'},'Termos'),h('a',{href:'#'},'Privacidade'),h('a',{href:'#'},'LGPD'))
+      )
+    )
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('app')).render(h(App,null));
 </script>
 </body>
 </html>
