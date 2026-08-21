@@ -238,7 +238,7 @@ function Landing(p){
       h('div',{className:'fgrid'},
         h('div',{className:'fcard'},h('div',{className:'fi'},'🎬'),h('h3',null,'Abra sua Live'),h('p',null,'Clique em "Iniciar Live", escolha a categoria e comece a transmitir ao vivo com sua câmera.')),
         h('div',{className:'fcard'},h('div',{className:'fi'},'🎁'),h('h3',null,'Receba Presentes'),h('p',null,'Espectadores enviam presentes com valor real: Rosa R$2, Coração R$5, Foguete R$20, Diamante R$50, Coroa R$100.')),
-        h('div',{className:'fcard'},h('div',{className:'fi'},'💰'),h('h3',null,'Ganhe Dinheiro'),h('p',null,'Você recebe 70% do valor de cada presente. Saque via PIX a qualquer momento.')),
+        h('div',{className:'fcard'},h('div',{className:'fi'},'💰'),h('h3',null,'Ganhe Dinheiro'),h('p',null,'Você recebe 70% do valor de cada presente. Saque via LofiPay a qualquer momento.')),
         h('div',{className:'fcard'},h('div',{className:'fi'},'🛡️'),h('h3',null,'Seguro'),h('p',null,'Verificação 18+, moderação 24h, denúncias. Ambiente seguro para criadores.')),
         h('div',{className:'fcard'},h('div',{className:'fi'},'🏆'),h('h3',null,'Ranking'),h('p',null,'Compete com outros criadores e suba no ranking semanal.')),
         h('div',{className:'fcard'},h('div',{className:'fi'},'📱'),h('h3',null,'Mobile First'),h('p',null,'Tudo otimizado para celular. Lives e chat funcionam perfeitamente.'))
@@ -530,7 +530,7 @@ function Dash(p){
       h('div',{className:'dcard cpnk'},h('div',{className:'di'},'🪙'),h('div',{className:'dn'},p.user.coins),h('div',{className:'dl'},'Moedas'))
     ),
     h('div',{style:{display:'flex',gap:10,marginBottom:20,flexWrap:'wrap'}},
-      h('button',{className:'btn btnp',onClick:function(){p.nav('wallet');}},'💰 Sacar PIX'),
+      h('button',{className:'btn btnp',onClick:function(){p.nav('wallet');}},'💰 Sacar via LofiPay'),
       p.user.verified?h('span',{className:'verify-badge',style:{fontSize:14,padding:'8px 16px'}},'✔️ Verificado'):h('button',{className:'btn btno',style:{borderColor:'#0096ff',color:'#0096ff'},onClick:function(){setStep(1);}},'🔐 Verificar Identidade')
     ),
     h('div',{className:'dsec'},h('h3',null,'📋 Ganhos'),myTx.length===0?h('p',{style:{color:'#888',fontSize:13}},'Nenhuma transação.'):h('table',{className:'dtable'},
@@ -594,8 +594,8 @@ function Wallet(p){
           h('div',{style:{fontSize:14,color:'#fff',margin:'4px 0'}},'R$ ',pk.price),pk.b?h('div',{style:{fontSize:10,color:'#00e676'}},'🎁 ',pk.b):null
         );})
       )
-    ):h('div',{className:'dsec'},h('h3',null,'💸 Sacar via PIX'),
-      h('div',{className:'fg'},h('label',null,'Chave PIX'),h('input',{value:p.user.email,readOnly:true,style:{opacity:.7}})),
+    ):h('div',{className:'dsec'},h('h3',null,'💸 Sacar via LofiPay'),
+      h('div',{className:'fg'},h('label',null,'Chave LofiPay'),h('input',{value:p.user.email,readOnly:true,style:{opacity:.7}})),
       h('div',{className:'fg'},h('label',null,'Valor'),h('input',{type:'number',value:amt,onChange:function(e){setAmt(e.target.value);},placeholder:'R$ 0,00',min:'50'})),
       h('button',{className:'btn btngold',onClick:function(){if(parseFloat(amt)>=50&&parseFloat(amt)<=p.user.balance){p.user.balance-=parseFloat(amt);var users=getUsers();var u=users.find(function(x){return x.id===p.user.id});if(u)u.balance=p.user.balance;saveUsers(users);p.setUser(Object.assign({},p.user));showToast('✅ Saque de R$ '+amt+'!');setAmt('');}else{showToast('❌ Valor inválido');}}},'Solicitar Saque')
     )
